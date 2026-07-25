@@ -52,7 +52,7 @@ const categories = [
   { icon: GraduationCap, title: "Education", desc: "Schools, colleges, coaching institutes & universities", tags: ["Schools", "Coaching"] },
   { icon: ShoppingBag, title: "Shopping & Local", desc: "Shops, markets, services and local brands", tags: ["Markets", "Brands"] },
   { icon: Car, title: "Transport", desc: "Taxi services, rentals and parking information", tags: ["Taxi", "Rentals"] },
-  { icon: Home, title: "Real Estate", desc: "Properties, rentals, builders and projects", tags: ["Rentals", "Buy"] },
+  { icon: HomeIcon, title: "Real Estate", desc: "Properties, rentals, builders and projects", tags: ["Rentals", "Buy"] },
 ];
 
 const places = [
