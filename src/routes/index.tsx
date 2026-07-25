@@ -184,7 +184,7 @@ function Home() {
               <a href="#explore" className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition-transform hover:scale-[1.03]">
                 Explore Dehradun <ArrowRight className="h-4 w-4" />
               </a>
-              <a href="#list" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur hover:bg-white/20">
+              <a href="/bussiness" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur hover:bg-white/20">
                 List Your Business
               </a>
             </div>
