@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Search, MapPin, Mountain, UtensilsCrossed, BedDouble, HeartPulse, GraduationCap,
-  ShoppingBag, Car, Home, Star, ArrowRight, Sparkles, Tag, Cloud, Calendar,
+  ShoppingBag, Car, Home as HomeIcon, Star, ArrowRight, Sparkles, Tag, Cloud, Calendar,
   Newspaper, TrafficCone, Send, ChevronRight, Menu, X, Facebook, Instagram,
   Twitter, Youtube, Phone, Mail, Camera, Heart, Plus,
 } from "lucide-react";
