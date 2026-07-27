@@ -181,9 +181,9 @@ function Home() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#explore" className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition-transform hover:scale-[1.03]">
-                Explore Dehradun <ArrowRight className="h-4 w-4" />
-              </a>
+              <Link to="/explore" className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition-transform hover:scale-[1.03]">
+  Explore Dehradun <ArrowRight className="h-4 w-4" />
+</Link>
               <a href="/business" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur hover:bg-white/20">
                 List Your Business
               </a>
