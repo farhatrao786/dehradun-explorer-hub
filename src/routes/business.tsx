@@ -17,7 +17,8 @@ function BusinessPage() {
         <form action="https://api.web3forms.com/submit" method="POST" className="flex flex-col gap-5">
           
           <input type="hidden" name="access_key" value="ede5da8f-b1ae-4c47-a3cd-5f7106d8391c" />
-          
+          <input type="hidden" name="redirect" value="https://thedehradun.com/success" />
+
           <div>
             <label className="text-sm font-semibold opacity-90">Business ka Naam:</label>
             <input 
