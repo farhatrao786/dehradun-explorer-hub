@@ -184,7 +184,7 @@ function Home() {
               <a href="#explore" className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition-transform hover:scale-[1.03]">
                 Explore Dehradun <ArrowRight className="h-4 w-4" />
               </a>
-              <a href="/bussiness" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur hover:bg-white/20">
+              <a href="/business" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur hover:bg-white/20">
                 List Your Business
               </a>
             </div>
@@ -390,9 +390,9 @@ function Home() {
                 <p className="mt-2 text-xs opacity-90">Featured placement, photos, analytics</p>
               </div>
             </div>
-            <button className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-foreground hover:scale-[1.02]">
-              <Plus className="h-4 w-4" /> List your business
-            </button>
+            <a href="/business" className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-foreground hover:scale-[1.02]">
+  <Plus className="h-4 w-4" /> List your business
+</a>
           </div>
         </div>
       </section>
