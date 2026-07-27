@@ -51,21 +51,19 @@ const places = [
 ];
 
 function ExplorePage() {
+  // Page load hote hi scroll ko forcefully top par set karne ke liye
   useEffect(() => {
-    // Top anchor element ko dhoondh kar us par scroll karega
-    const anchor = document.getElementById("top-anchor");
-    if (anchor) {
-      anchor.scrollIntoView({ behavior: "instant" });
-    } else {
+    const timer = setTimeout(() => {
       window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    }
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="w-full bg-background px-4 py-12">
-      {/* Yeh anchor point bilkul upar rahega */}
-      <div id="top-anchor" className="absolute top-0 left-0 h-0 w-0" />
-
       <div className="max-w-6xl mx-auto">
         
         {/* Header Section */}
