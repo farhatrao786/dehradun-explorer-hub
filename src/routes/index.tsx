@@ -456,7 +456,7 @@ function Home() {
   <Link to="/about" className="text-sm opacity-80 hover:opacity-100">About us</Link>
 <Link to="/contact" className="text-sm opacity-80 hover:opacity-100">Contact Us</Link>
 </div>
-
+</div>
           <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
             <p>© {new Date().getFullYear()} TheDehradun.com · Made with ♥ in the Doon valley</p>
             <div className="flex items-center gap-4">
