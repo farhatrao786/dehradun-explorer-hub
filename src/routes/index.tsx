@@ -451,8 +451,12 @@ function Home() {
             </div>
             <FooterCol title="Explore" links={["Tourist places", "Food & Restaurants", "Hotels & Stay", "Healthcare", "Education"]} />
             <FooterCol title="Business" links={["List your business", "Advertise", "Premium listing", "Business login", "Contact sales"]} />
-            <FooterCol title="Company" links={["About us", "Blog", "Contact", "Privacy Policy", "Terms of Service"]} />
-          </div>
+            <div className="flex flex-col gap-2">
+  <span className="font-semibold text-white">Company</span>
+  <a href="/about" className="text-sm opacity-80 hover:opacity-100">About us</a>
+  <a href="/contact" className="text-sm opacity-80 hover:opacity-100">Contact Us</a>
+</div>
+
           <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
             <p>© {new Date().getFullYear()} TheDehradun.com · Made with ♥ in the Doon valley</p>
             <div className="flex items-center gap-4">
