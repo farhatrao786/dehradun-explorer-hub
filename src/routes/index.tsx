@@ -112,8 +112,14 @@ function Home() {
           </a>
           <nav className="hidden items-center gap-8 md:flex">
             {["Explore", "Food", "Stay", "Business", "Blog"].map((l) => (
-              <a key={l} href={`#${l.toLowerCase()}`} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">{l}</a>
-            ))}
+  <Link
+    key={l}
+    to={l === "Explore" ? "/explore" : `#${l.toLowerCase()}`}
+    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+  >
+    {l}
+  </Link>
+))}
           </nav>
           <div className="hidden items-center gap-3 md:flex">
             <button className="rounded-full px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary">Sign in</button>
