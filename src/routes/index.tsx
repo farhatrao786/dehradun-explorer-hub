@@ -139,7 +139,7 @@ function Home() {
       </header>
 
       {/* HERO */}
-      <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-16">
+      <section className="relative isolate flex min-h-[100svh] items-center min-h-screen pt-16">
         <img
           src={heroImg}
           alt="Dehradun valley at golden hour with mountains and forest"
@@ -206,7 +206,7 @@ function Home() {
       <Section id="explore" eyebrow="Browse the city" title="Everything Dehradun, in one place">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map(({ icon: Icon, title, desc, tags }) => (
-            <a key={title} href="#" className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
+            <a key={title} href="#" className="group relative min-h-screen rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
               <div className="mb-4 grid h-12 w-12 place-items-center rounded-xl gradient-forest text-primary-foreground">
                 <Icon className="h-6 w-6" />
               </div>
@@ -227,8 +227,8 @@ function Home() {
       <Section id="places" eyebrow="Featured places" title="Postcard-worthy spots to visit" cta={{ label: "See all places", href: "#" }} tone="muted">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {places.map((p) => (
-            <article key={p.name} className="group overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
-              <div className="relative aspect-[4/3] overflow-hidden">
+            <article key={p.name} className="group min-h-screen rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
+              <div className="relative aspect-[4/3] min-h-screen">
                 <img src={p.img} alt={p.name} loading="lazy" width={1024} height={768} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <button aria-label="Save" className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-foreground backdrop-blur hover:bg-white">
                   <Heart className="h-4 w-4" />
@@ -289,7 +289,7 @@ function Home() {
 
       {/* AI ASSISTANT */}
       <section className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl gradient-forest text-primary-foreground">
+        <div className="mx-auto max-w-7xl min-h-screen rounded-3xl gradient-forest text-primary-foreground">
           <div className="grid gap-8 p-8 sm:p-12 lg:grid-cols-2 lg:items-center">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-medium backdrop-blur">
@@ -322,7 +322,7 @@ function Home() {
       <Section id="deals" eyebrow="Deals & offers" title="Save more across Dehradun" tone="muted">
         <div className="grid gap-4 md:grid-cols-3">
           {deals.map((d) => (
-            <div key={d.brand} className={`overflow-hidden rounded-2xl p-6 text-primary-foreground ${d.color}`}>
+            <div key={d.brand} className={`min-h-screen rounded-2xl p-6 text-primary-foreground ${d.color}`}>
               <Tag className="h-6 w-6 opacity-80" />
               <h3 className="mt-4 font-display text-xl font-semibold">{d.offer}</h3>
               <p className="mt-1 text-sm opacity-90">{d.brand}</p>
@@ -374,7 +374,7 @@ function Home() {
             </div>
           </div>
 
-          <div id="list" className="relative overflow-hidden rounded-3xl gradient-forest p-8 text-primary-foreground sm:p-10">
+          <div id="list" className="relative min-h-screen rounded-3xl gradient-forest p-8 text-primary-foreground sm:p-10">
             <span className="text-xs font-semibold uppercase tracking-widest opacity-80">For businesses</span>
             <h3 className="mt-3 font-display text-2xl font-semibold sm:text-3xl">List your business on TheDehradun.com</h3>
             <p className="mt-3 max-w-md text-white/80">Reach thousands of locals and tourists every week. Free listing available. Upgrade anytime.</p>
@@ -401,8 +401,8 @@ function Home() {
       <Section id="blog" eyebrow="From the blog" title="Stories, guides & local knowledge" cta={{ label: "Read all posts", href: "#" }}>
         <div className="grid gap-6 md:grid-cols-3">
           {blogPosts.map((p, i) => (
-            <a key={p.title} href="#" className="group block overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
-              <div className="relative aspect-[16/10] overflow-hidden gradient-forest">
+            <a key={p.title} href="#" className="group block min-h-screen rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
+              <div className="relative aspect-[16/10] min-h-screen gradient-forest">
                 <img src={[robbers, sahastradhara, maldevta][i]} alt="" loading="lazy" width={1024} height={640} className="h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="p-5">
