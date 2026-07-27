@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Search, MapPin, Mountain, UtensilsCrossed, BedDouble, HeartPulse, GraduationCap,
@@ -453,8 +453,8 @@ function Home() {
             <FooterCol title="Business" links={["List your business", "Advertise", "Premium listing", "Business login", "Contact sales"]} />
             <div className="flex flex-col gap-2">
   <span className="font-semibold text-white">Company</span>
-  <a href="/about" className="text-sm opacity-80 hover:opacity-100">About us</a>
-  <a href="/contact" className="text-sm opacity-80 hover:opacity-100">Contact Us</a>
+  <Link to="/about" className="text-sm opacity-80 hover:opacity-100">About us</Link>
+<Link to="/contact" className="text-sm opacity-80 hover:opacity-100">Contact Us</Link>
 </div>
 
           <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
