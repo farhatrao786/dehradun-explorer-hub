@@ -51,9 +51,9 @@ const places = [
 ];
 
 function ExplorePage() {
-  // Page khulte hi yeh upar scroll kar dega
+  // Yeh code page khulte hi scroll ko ekdum upar set kar dega
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
   return (
