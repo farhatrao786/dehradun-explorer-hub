@@ -4,7 +4,6 @@ export const Route = createFileRoute('/explore')({
   component: ExplorePage,
 });
 
-// Dehradun ki famous jagahon ka data
 const places = [
   {
     id: 1,
@@ -52,52 +51,46 @@ const places = [
 
 function ExplorePage() {
   return (
-    <div className="flex min-h-screen flex-col items-center bg-background px-4 py-16 overflow-hidden">
-      
-      {/* Main Container */}
-      <div className="w-full max-w-6xl z-10">
+    <div className="w-full bg-background px-4 py-12">
+      <div className="max-w-6xl mx-auto">
         
-        {/* Animated Header Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-primary to-orange-500 bg-clip-text text-transparent transform transition-all hover:scale-105 duration-500 cursor-default">
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 bg-gradient-to-r from-primary to-orange-500 bg-clip-text text-transparent">
             Explore The Doon Valley
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             Pahadon ki rani, Dehradun mein aapka swagat hai! Yahan ke behtareen tourist spots, jharne, aur khubsoorat wadiyon ko discover karein.
           </p>
         </div>
 
-        {/* Animated Grid for Places */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        {/* Grid for Places */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {places.map((place) => (
             <div 
               key={place.id}
-              className={`group relative overflow-hidden rounded-2xl border border-border/50 bg-gradient-to-br ${place.color} p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-primary/30 cursor-pointer backdrop-blur-sm`}
+              className={`group relative overflow-hidden rounded-2xl border border-border/50 bg-gradient-to-br ${place.color} p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-primary/30 cursor-pointer backdrop-blur-sm`}
             >
-              {/* Animated Icon */}
-              <div className="text-4xl mb-5 transform transition-transform duration-300 group-hover:scale-125 group-hover:rotate-12 inline-block">
+              <div className="text-3xl mb-4 transform transition-transform duration-300 group-hover:scale-125 group-hover:rotate-12 inline-block">
                 {place.icon}
               </div>
               
-              <h3 className="text-2xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
+              <h3 className="text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors duration-300">
                 {place.name}
               </h3>
               
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {place.desc}
               </p>
-              
-              {/* Decorative background glow on hover */}
-              <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-primary/5 rounded-full blur-2xl transition-all duration-500 group-hover:bg-primary/20 group-hover:scale-150"></div>
             </div>
           ))}
         </div>
 
-        {/* Back Button with pulse/scale animation */}
-        <div className="text-center">
+        {/* Back Button */}
+        <div className="text-center pb-8">
           <Link 
             to="/" 
-            className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-base font-bold text-primary-foreground shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-primary/30 hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-3 text-sm font-bold text-primary-foreground shadow-lg transition-all duration-300 hover:scale-105 hover:bg-primary/90"
           >
             ← Back to Home
           </Link>
