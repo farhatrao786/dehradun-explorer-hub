@@ -14,7 +14,7 @@ function BusinessPage() {
           <p className="mt-2 text-sm opacity-80">Welcome to TheDehradun.com Business Listing</p>
         </div>
 
-        <form action="https://api.web3forms.com/submit" method="POST" encType="multipart/form-data" className="flex flex-col gap-5">
+        <form action="https://api.web3forms.com/submit" method="POST" className="flex flex-col gap-5">
           
           <input type="hidden" name="access_key" value="ede5da8f-b1ae-4c47-a3cd-5f7106d8391c" />
           
@@ -40,19 +40,22 @@ function BusinessPage() {
             />
           </div>
 
-          <div>
-            <label className="text-sm font-semibold opacity-90">Dukan ya Business ki Photo upload karein:</label>
-            <input 
-              type="file" 
-              name="Business_Image" 
-              accept="image/png, image/jpeg, image/jpg" 
-              className="mt-2 w-full cursor-pointer rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-sm opacity-80 outline-none transition-all file:mr-4 file:rounded-full file:border-0 file:bg-white file:px-4 file:py-2 file:text-xs file:font-bold file:text-black hover:file:bg-gray-200" 
-            />
+          {/* WhatsApp Photo Section */}
+          <div className="rounded-2xl border border-green-500/30 bg-green-500/10 p-4 text-center">
+            <p className="text-xs font-medium opacity-90 mb-3">📸 Dukan ya Business ki photo bhejne ke liye:</p>
+            <a 
+              href="https://wa.me/919999999999?text=Hello,%20main%20apni%20business%20listing%20ke%20liye%20photo%20bhej%20raha%20hoon." 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-green-600 px-6 py-3 text-sm font-bold text-white transition-transform hover:scale-[1.02]"
+            >
+              💬 Upload Photo via WhatsApp
+            </a>
           </div>
           
           <button 
             type="submit" 
-            className="mt-4 w-full rounded-full bg-white px-6 py-3.5 text-sm font-bold text-black transition-transform hover:scale-[1.02]"
+            className="mt-2 w-full rounded-full bg-white px-6 py-3.5 text-sm font-bold text-black transition-transform hover:scale-[1.02]"
           >
             Submit Details
           </button>
