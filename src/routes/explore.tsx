@@ -51,9 +51,11 @@ const places = [
 ];
 
 function ExplorePage() {
-  // Yeh code page khulte hi scroll ko ekdum upar set kar dega
+  // Page khulte hi scroll ko force-fully top par set karne ke liye
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   }, []);
 
   return (
