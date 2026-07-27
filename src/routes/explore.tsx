@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 export const Route = createFileRoute('/explore')({
   component: ExplorePage,
@@ -50,6 +51,11 @@ const places = [
 ];
 
 function ExplorePage() {
+  // Page khulte hi yeh upar scroll kar dega
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="w-full bg-background px-4 py-12">
       <div className="max-w-6xl mx-auto">
