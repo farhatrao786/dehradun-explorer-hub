@@ -117,7 +117,7 @@ function Home() {
           </nav>
           <div className="hidden items-center gap-3 md:flex">
             <button className="rounded-full px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary">Sign in</button>
-            <a href="#list" className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.03]">List Business</a>
+            <Link to="/business" className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.05]">List Business</Link>
           </div>
           <button aria-label="Menu" onClick={() => setMenu(!menu)} className="grid h-10 w-10 place-items-center rounded-lg md:hidden">
             {menu ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
