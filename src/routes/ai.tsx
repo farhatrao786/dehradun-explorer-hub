@@ -38,7 +38,7 @@ function DehradunAIPage() {
 
         try {
       // Yahan apni bilkul nayi fresh key ko tod kar daal dijiye:
-      const apiKey = "NAYI_KEY_KA_PEHLA_TUKDA" + "NAYI_KEY_KA_DOOSRA_TUKDA";
+      const apiKey = "AQ.Ab8RN6KRWiH_ZWPrqCbI-G-bFC" + "Z0jKYrXcaFM2_kAWopwXOb6Q";
 
       const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
         method: "POST",
