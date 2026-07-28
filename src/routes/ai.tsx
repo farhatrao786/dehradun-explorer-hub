@@ -53,21 +53,20 @@ function DehradunAIPage() {
         })
       });
 
-      const data = await response.json();
+            const data = await response.json();
       
       if (data.candidates && data.candidates.length > 0) {
-        // AI ka jawaab nikal kar screen par dikhana
         const aiResponse = data.candidates[0].content.parts[0].text;
         setMessages(prev => [...prev, { role: "ai", text: aiResponse }]);
       } else {
-        setMessages(prev => [...prev, { role: "ai", text: "Maaf karna, main thoda samajh nahi paaya. Kya aap alag tareeqe se pooch sakte hain?" }]);
-
+        setMessages(prev => [...prev, { role: "ai", text: "API Error: " + JSON.stringify(data) }]);
       }
-    } catch (error) {
-      setMessages(prev => [...prev, { role: "ai", text: "Maaf karna, abhi network mein thodi dikkat hai. Thodi der baad try karein." }]);
+    } catch (error: any) {
+      setMessages(prev => [...prev, { role: "ai", text: "Code Error: " + error.message }]);
     } finally {
       setIsTyping(false);
     }
+
   };
 
   return (
