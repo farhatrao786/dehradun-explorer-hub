@@ -131,7 +131,7 @@ function AiPage() {
                   </div>
                 ) : (
                   <div className="max-w-[95%] whitespace-pre-wrap text-sm leading-relaxed text-foreground">
-                    {m.content}
+                    <AssistantText text={m.content} />
                   </div>
                 )}
               </div>
