@@ -178,13 +178,14 @@ function Home() {
                 />
               </div>
               <div className="flex items-center gap-2">
-                <button type="submit" className="flex-1 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.02] sm:flex-none">
+                <button type="submit" className="flex-1 whitespace-nowrap rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-transform hover:scale-[1.02] sm:flex-none">
                   Search
                 </button>
-                <Link to="/ai" className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-transform hover:scale-[1.02] sm:flex-none">
-                  <Sparkles className="h-4 w-4" /> Ask Dehradun AI
+                <Link to="/ai" className="inline-flex flex-1 items-center justify-center gap-1 whitespace-nowrap rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-accent-foreground transition-transform hover:scale-[1.02] sm:flex-none">
+                  <Sparkles className="h-3.5 w-3.5 shrink-0" /> Ask Dehradun AI
                 </Link>
               </div>
+
             </form>
 
             <div className="mt-3 flex flex-wrap gap-2">
