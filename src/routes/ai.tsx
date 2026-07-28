@@ -41,23 +41,14 @@ function DehradunAIPage() {
       const apiKey = "AQ.Ab8RN6ISFJDmEvNfZBWB" + "HfGQBFF12wAbXma4t9Hv2uSD-3TD1Q"; 
       
       // Google Gemini ko request bhejna
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key=${apiKey}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{
-            parts: [{ 
-              text: `You are DehradunAI, a highly knowledgeable, helpful, and friendly local guide for Dehradun, Uttarakhand, India. Answer the following user query politely, keep it concise, and use emojis. User Query: ${text}` 
-            }]
-          }]
-        })
-      });
-
-            const data = await response.json();
+            // Seedha Google se list maangna
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+      const data = await response.json();
       
-      if (data.candidates && data.candidates.length > 0) {
-        const aiResponse = data.candidates[0].content.parts[0].text;
-        setMessages(prev => [...prev, { role: "ai", text: aiResponse }]);
+      if (data.models) {
+        // Sirf models ke naam nikal kar screen par dikhana
+        const modelNames = data.models.map((m: any) => m.name).join("\n");
+        setMessages(prev => [...prev, { role: "ai", text: "Google ke Asli Models ki List:\n" + modelNames }]);
       } else {
         setMessages(prev => [...prev, { role: "ai", text: "API Error: " + JSON.stringify(data) }]);
       }
@@ -66,6 +57,7 @@ function DehradunAIPage() {
     } finally {
       setIsTyping(false);
     }
+
 
   };
 
