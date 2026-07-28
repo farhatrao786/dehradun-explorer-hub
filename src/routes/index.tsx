@@ -323,7 +323,10 @@ function Home() {
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
                 {["Best cafe near me", "Places in one day", "Best hospital", "Family picnic"].map((s) => (
-                  <button key={s} className="rounded-full bg-white/15 px-3 py-1 text-xs backdrop-blur hover:bg-white/25">{s}</button>
+                  <Link key={s} to="/ai" className="rounded-full bg-white/15 px-3 py-1 text-sm text-white hover:bg-white/30 transition-all">
+  {s}
+</Link>
+
                 ))}
               </div>
             </div>
