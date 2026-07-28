@@ -60,7 +60,7 @@ function DehradunAIPage() {
         const aiResponse = data.candidates[0].content.parts[0].text;
         setMessages(prev => [...prev, { role: "ai", text: aiResponse }]);
       } else {
-        setMessages(prev => [...prev, { role: "ai", text: "Google ka Asli Error: " + JSON.stringify(data) }]);
+        setMessages(prev => [...prev, { role: "ai", text: "Maaf karna, main thoda samajh nahi paaya. Kya aap alag tareeqe se pooch sakte hain?" }]);
 
       }
     } catch (error) {
