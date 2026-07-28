@@ -173,14 +173,20 @@ function Home() {
                 <input
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  className="w-full min-w-0 bg-transparent py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none sm:text-base"
+                  className="w-full min-w-0 bg-transparent py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
                   placeholder="Search restaurants, hotels, hospitals, schools, places..."
                 />
               </div>
-              <button type="submit" className="rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.02]">
-                Search
-              </button>
+              <div className="flex items-center gap-2">
+                <button type="submit" className="flex-1 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.02] sm:flex-none">
+                  Search
+                </button>
+                <Link to="/ai" className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-transform hover:scale-[1.02] sm:flex-none">
+                  <Sparkles className="h-4 w-4" /> Ask Dehradun AI
+                </Link>
+              </div>
             </form>
+
             <div className="mt-3 flex flex-wrap gap-2">
               {["Cafes near me", "Best schools", "Weekend trips", "Hospitals 24/7"].map((s) => (
                 <button key={s} onClick={() => setQuery(s)} className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs text-white/90 backdrop-blur hover:bg-white/20">{s}</button>
