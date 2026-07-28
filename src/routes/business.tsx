@@ -45,7 +45,7 @@ function BusinessPage() {
           <div className="rounded-2xl border border-green-500/30 bg-green-500/10 p-4 text-center">
             <p className="text-xs font-medium opacity-90 mb-3">📸 Dukan ya Business ki photo bhejne ke liye:</p>
             <a 
-              href="https://wa.me/919999999999?text=Hello,%20main%20apni%20business%20listing%20ke%20liye%20photo%20bhej%20raha%20hoon." 
+              href="https://wa.me/919068616888?text=Hello,%20main%20apni%20business%20listing%20ke%20liye%20photo%20bhej%20raha%20hoon." 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-green-600 px-6 py-3 text-sm font-bold text-white transition-transform hover:scale-[1.02]"
