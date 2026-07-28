@@ -41,7 +41,7 @@ function DehradunAIPage() {
       const apiKey = "AQ.Ab8RN6ISFJDmEvNfZBWB" + "HfGQBFF12wAbXma4t9Hv2uSD-3TD1Q"; 
       
       // Google Gemini ko request bhejna
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
