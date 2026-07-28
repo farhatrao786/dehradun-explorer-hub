@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/success")({
+export const Route = createFileRoute("/Success")({
   component: SuccessPage,
 });
 

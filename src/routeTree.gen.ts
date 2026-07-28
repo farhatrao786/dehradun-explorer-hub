@@ -9,8 +9,56 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StayRouteImport } from './routes/stay'
+import { Route as FoodRouteImport } from './routes/food'
+import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BusinessRouteImport } from './routes/business'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as SuccessRouteImport } from './routes/Success'
 import { Route as IndexRouteImport } from './routes/index'
 
+const StayRoute = StayRouteImport.update({
+  id: '/stay',
+  path: '/stay',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FoodRoute = FoodRouteImport.update({
+  id: '/food',
+  path: '/food',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExploreRoute = ExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BusinessRoute = BusinessRouteImport.update({
+  id: '/business',
+  path: '/business',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SuccessRoute = SuccessRouteImport.update({
+  id: '/Success',
+  path: '/Success',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +67,144 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/Success': typeof SuccessRoute
+  '/about': typeof AboutRoute
+  '/blog': typeof BlogRoute
+  '/business': typeof BusinessRoute
+  '/contact': typeof ContactRoute
+  '/explore': typeof ExploreRoute
+  '/food': typeof FoodRoute
+  '/stay': typeof StayRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/Success': typeof SuccessRoute
+  '/about': typeof AboutRoute
+  '/blog': typeof BlogRoute
+  '/business': typeof BusinessRoute
+  '/contact': typeof ContactRoute
+  '/explore': typeof ExploreRoute
+  '/food': typeof FoodRoute
+  '/stay': typeof StayRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/Success': typeof SuccessRoute
+  '/about': typeof AboutRoute
+  '/blog': typeof BlogRoute
+  '/business': typeof BusinessRoute
+  '/contact': typeof ContactRoute
+  '/explore': typeof ExploreRoute
+  '/food': typeof FoodRoute
+  '/stay': typeof StayRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/Success'
+    | '/about'
+    | '/blog'
+    | '/business'
+    | '/contact'
+    | '/explore'
+    | '/food'
+    | '/stay'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/Success'
+    | '/about'
+    | '/blog'
+    | '/business'
+    | '/contact'
+    | '/explore'
+    | '/food'
+    | '/stay'
+  id:
+    | '__root__'
+    | '/'
+    | '/Success'
+    | '/about'
+    | '/blog'
+    | '/business'
+    | '/contact'
+    | '/explore'
+    | '/food'
+    | '/stay'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SuccessRoute: typeof SuccessRoute
+  AboutRoute: typeof AboutRoute
+  BlogRoute: typeof BlogRoute
+  BusinessRoute: typeof BusinessRoute
+  ContactRoute: typeof ContactRoute
+  ExploreRoute: typeof ExploreRoute
+  FoodRoute: typeof FoodRoute
+  StayRoute: typeof StayRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/stay': {
+      id: '/stay'
+      path: '/stay'
+      fullPath: '/stay'
+      preLoaderRoute: typeof StayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/food': {
+      id: '/food'
+      path: '/food'
+      fullPath: '/food'
+      preLoaderRoute: typeof FoodRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explore': {
+      id: '/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/business': {
+      id: '/business'
+      path: '/business'
+      fullPath: '/business'
+      preLoaderRoute: typeof BusinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Success': {
+      id: '/Success'
+      path: '/Success'
+      fullPath: '/Success'
+      preLoaderRoute: typeof SuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,7 +217,25 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SuccessRoute: SuccessRoute,
+  AboutRoute: AboutRoute,
+  BlogRoute: BlogRoute,
+  BusinessRoute: BusinessRoute,
+  ContactRoute: ContactRoute,
+  ExploreRoute: ExploreRoute,
+  FoodRoute: FoodRoute,
+  StayRoute: StayRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
