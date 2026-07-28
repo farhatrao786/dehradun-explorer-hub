@@ -114,7 +114,7 @@ function Home() {
             {["Explore", "Food", "Stay", "Business", "Blog"].map((l) => (
   <Link
     key={l}
-    to={["Explore", "Stay", "Business"].includes(l) ? `/${l.toLowerCase()}` : `#${l.toLowerCase()}`}
+    to={["Explore", "Food", "Stay", "Business"].includes(l) ? `/${l.toLowerCase()}` : `#${l.toLowerCase()}`}
 
     className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
   >
