@@ -312,8 +312,14 @@ function Home() {
             <div className="rounded-2xl bg-white/10 p-4 backdrop-blur">
               <div className="flex items-center gap-2 rounded-xl bg-white/95 p-2 text-foreground">
                 <Sparkles className="ml-2 h-4 w-4 text-primary" />
-                <input placeholder="Best cafe near me..." className="w-full min-w-0 bg-transparent py-2 text-sm focus:outline-none" />
-                <button className="grid h-9 w-9 place-items-center rounded-lg bg-primary text-primary-foreground"><Send className="h-4 w-4" /></button>
+                <Link to="/ai" className="flex items-center gap-2 rounded-xl bg-white/95 p-2 text-left hover:scale-[1.02] transition-all cursor-pointer shadow-sm">
+  <Sparkles className="ml-2 h-4 w-4 text-primary" />
+  <span className="w-full min-w-0 text-muted-foreground text-sm pl-1 py-1.5 opacity-80">Ask anything about Dehradun...</span>
+  <div className="grid h-9 w-9 place-items-center rounded-lg bg-primary text-white shadow-md">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+  </div>
+</Link>
+
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
                 {["Best cafe near me", "Places in one day", "Best hospital", "Family picnic"].map((s) => (
