@@ -9,7 +9,7 @@ function DehradunAIPage() {
   const [messages, setMessages] = useState([
     {
       role: "ai",
-      text: "Namaste! 🙏 Main DehradunAI hoon. Main aapki 3 tarah se madad kar sakta hoon:\n\n🗺️ 1. Local Guide: Best cafes aur ghumne ki jagah.\n📅 2. Trip Planner: 2-3 din ka poora tour plan.\n🔍 3. Business Finder: Aapke aas-paas best services aur dukanein.\n\nAapko aaj kya janna hai?"
+      text: "Namaste! 🙏 Main DehradunAI hoon aur ab main poori tarah se smart ho chuka hoon. Aap mujhse Dehradun ke baare mein kuch bhi pooch sakte hain (jaise cafes, ghumne ki jagah, ya raste)!"
     }
   ]);
   const [input, setInput] = useState("");
@@ -28,32 +28,45 @@ function DehradunAIPage() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
-  const handleSend = (text: string) => {
+  const handleSend = async (text: string) => {
     if (!text.trim()) return;
 
-    // 1. Add User Message
+    // 1. User ka message add karein
     setMessages(prev => [...prev, { role: "user", text }]);
     setInput("");
     setIsTyping(true);
 
-    // 2. Simulate AI Processing & Response (Dummy Logic for now)
-    setTimeout(() => {
-      let aiResponse = "";
-      const lowerText = text.toLowerCase();
+    try {
+      // Yahan aapki Gemini API Key set kar di gayi hai
+      const apiKey = "AQ.Ab8RN6JGCpzBw63tnOP-VnmBBHDZE9HCsEOzQz-_m4ODpMsNXQ"; 
+      
+      // Google Gemini ko request bhejna
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{ 
+              text: `You are DehradunAI, a highly knowledgeable, helpful, and friendly local guide for Dehradun, Uttarakhand, India. Answer the following user query politely, keep it concise, and use emojis. User Query: ${text}` 
+            }]
+          }]
+        })
+      });
 
-      if (lowerText.includes("trip") || lowerText.includes("plan")) {
-        aiResponse = "Toh chaliye, 2 din ka plan banate hain! 📅\n\nDay 1: Subah Sahastradhara nahane jayein, dopahar mein Robber's Cave (Guchhupani) explore karein, aur shaam ko Rajpur Road par kisi badhiya cafe mein dinner karein.\n\nDay 2: Mussoorie nikal jayein. Kempty Fall aur Mall Road ghum kar shaam tak wapas aa jayein. Kaisa laga yeh plan?";
-      } else if (lowerText.includes("business") || lowerText.includes("agency") || lowerText.includes("marketing")) {
-        aiResponse = "Agar aap business aur services dhoond rahe hain, toh 'Viral Reach Media' digital marketing ke liye aur 'Elite Modular Interiors' architecture ke liye Dehradun mein sabse best hain! 🔍 Humari Business Directory mein inki details hain.";
-      } else if (lowerText.includes("cafe") || lowerText.includes("food")) {
-        aiResponse = "Rajpur Road par aapko 'Cafe De Piccolo' aur 'Orchard' jaise best cafes milenge. Wahan ka momos aur pasta zaroor try karein! ☕🍝";
+      const data = await response.json();
+      
+      if (data.candidates && data.candidates.length > 0) {
+        // AI ka jawaab nikal kar screen par dikhana
+        const aiResponse = data.candidates[0].content.parts[0].text;
+        setMessages(prev => [...prev, { role: "ai", text: aiResponse }]);
       } else {
-        aiResponse = "Yeh ek bahut accha sawal hai! Main abhi naya hoon aur seekh raha hoon. Par aap Local Business ya Dehradun ghumne se judi koi bhi baat pooch sakte hain! ✨";
+        setMessages(prev => [...prev, { role: "ai", text: "Maaf karna, main thoda samajh nahi paaya. Kya aap alag tareeqe se pooch sakte hain?" }]);
       }
-
-      setMessages(prev => [...prev, { role: "ai", text: aiResponse }]);
+    } catch (error) {
+      setMessages(prev => [...prev, { role: "ai", text: "Maaf karna, abhi network mein thodi dikkat hai. Thodi der baad try karein." }]);
+    } finally {
       setIsTyping(false);
-    }, 1500); // 1.5 second ka delay taaki asali typing jaisa lage
+    }
   };
 
   return (
@@ -64,7 +77,7 @@ function DehradunAIPage() {
           <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-500 to-indigo-600 bg-clip-text text-transparent flex items-center gap-2">
             ✨ DehradunAI
           </h1>
-          <p className="text-sm text-muted-foreground mt-1">Aapka Smart Local Assistant</p>
+          <p className="text-sm text-muted-foreground mt-1">Powered by Google Gemini 🧠</p>
         </div>
         <Link to="/" className="text-sm font-semibold px-4 py-2 bg-secondary text-secondary-foreground rounded-full hover:bg-secondary/80 transition">
           ✕ Close
@@ -127,7 +140,7 @@ function DehradunAIPage() {
             />
             <button 
               onClick={() => handleSend(input)}
-              disabled={!input.trim()}
+              disabled={!input.trim() || isTyping}
               className="bg-primary text-primary-foreground px-6 py-4 rounded-xl font-bold shadow-md hover:bg-primary/90 disabled:opacity-50 transition-all flex items-center justify-center"
             >
               Send ✈️
