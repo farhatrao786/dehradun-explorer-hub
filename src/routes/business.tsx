@@ -78,7 +78,7 @@ function BusinessPage() {
             <form action="https://api.web3forms.com/submit" method="POST" className="flex flex-col gap-4">
               
               {/* APNI NAYI ACCESS KEY YAHAN DAALEIN */}
-              <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+              <input type="hidden" name="access_key" value="ede5da8f-b1ae-4c47-a3cd-5f7106d8391c"/>
               
               {/* Professional Email Look Ke Liye */}
               <input type="hidden" name="subject" value="New Business Listing Request - Dehradun Hub" />
