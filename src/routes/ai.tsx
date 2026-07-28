@@ -32,6 +32,31 @@ const SUGGESTIONS = [
   "Budget hotels near Rajpur Road",
 ];
 
+function AssistantText({ text }: { text: string }) {
+  const parts = text.split(/\[\[([^\]]+)\]\]/g);
+  return (
+    <>
+      {parts.map((part, i) =>
+        i % 2 === 1 ? (
+          <span key={i} className="inline-flex flex-wrap items-baseline gap-1">
+            <strong className="font-semibold text-foreground">{part}</strong>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${part} Dehradun`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-md bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary underline-offset-2 hover:underline"
+            >
+              📍 Map par dekho
+            </a>
+          </span>
+        ) : (
+          <span key={i}>{part}</span>
+        ),
+      )}
+    </>
+  );
+}
+
 function AiPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -131,7 +156,7 @@ function AiPage() {
                   </div>
                 ) : (
                   <div className="max-w-[95%] whitespace-pre-wrap text-sm leading-relaxed text-foreground">
-                    {m.content}
+                    <AssistantText text={m.content} />
                   </div>
                 )}
               </div>
