@@ -1,82 +1,90 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client"; 
 
 export const Route = createFileRoute('/business')({
   component: BusinessPage,
 });
 
+// Aapka Supabase URL aur Key yahan set ho gaya hai 🚀
+const SUPABASE_URL = "https://wixyklziushvegjhmkes.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_TjJS7e8qwjCNMGtmeUOZKA_dS9mbE3R";
+
 function BusinessPage() {
-  // UI States
   const [isLoaded, setIsLoaded] = useState(false);
   const [showForm, setShowForm] = useState(false);
   
-  // Database States
   const [shops, setShops] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Form States
+  // Form states
   const [shopName, setShopName] = useState("");
   const [category, setCategory] = useState("");
   const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  // Step 1: Database se data laane ka function
+  // Database se data laane ka Direct API function
   const fetchShops = async () => {
     try {
-      const { data, error } = await supabase
-        .from('shops')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('Error fetching shops:', error.message);
-      } else if (data) {
-        setShops(data);
-      }
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/shops?select=*&order=created_at.desc`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      
+      if (!response.ok) throw new Error('Data fetch failed');
+      
+      const data = await response.json();
+      setShops(data);
     } catch (err) {
-      console.error('Unexpected error:', err);
+      console.error('Error:', err);
     } finally {
       setLoading(false);
     }
   };
 
-  // Page load hone par animation aur data fetch
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     const timer = setTimeout(() => setIsLoaded(true), 100);
-    
-    fetchShops(); // Database se data mangwao
-
+    fetchShops();
     return () => clearTimeout(timer);
   }, []);
 
-  // Step 2: Form submit karke database me save karna
+  // Form submit karke Direct API se data save karna
   const handleSubmitBusiness = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
     try {
-      const { error } = await supabase.from('shops').insert([
-        {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/shops`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
           shop_name: shopName,
           category: category,
           phone: phone,
-        }
-      ]);
+        })
+      });
 
-      if (error) {
-        alert('Error saving business: ' + error.message);
+      if (!response.ok) {
+        const errorData = await response.json();
+        alert('Error saving business: ' + errorData.message);
       } else {
         alert('Business successfully listed!');
         setShopName("");
         setCategory("");
         setPhone("");
         setShowForm(false);
-        fetchShops(); // Nayi list turant fetch karo taaki turant dikhe
+        fetchShops(); // Refresh list instantly
       }
     } catch (err) {
       console.error('Error:', err);
+      alert('Network Error!');
     } finally {
       setSubmitting(false);
     }
@@ -107,7 +115,7 @@ function BusinessPage() {
           </button>
         </div>
 
-        {/* Form Section */}
+        {/* Database Connected Form */}
         {showForm && (
           <div className="max-w-lg mx-auto bg-card border border-border/50 shadow-2xl rounded-2xl p-8 mb-16 animate-in fade-in slide-in-from-top-4 duration-500">
             <h2 className="text-2xl font-bold mb-6 text-foreground text-center">Add Your Business</h2>
@@ -172,7 +180,7 @@ function BusinessPage() {
           </div>
         )}
 
-        {/* Database Shops List */}
+        {/* Display Live Shops */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {loading ? (
             <p className="text-center col-span-full text-muted-foreground">Loading businesses from database...</p>
@@ -193,7 +201,7 @@ function BusinessPage() {
                       🏢
                     </div>
                     <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
-                      {business.category || "Local Business"}
+                      {business.category || "Dehradun Hub"}
                     </span>
                   </div>
                   
