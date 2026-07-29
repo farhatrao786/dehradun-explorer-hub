@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as StayRouteImport } from './routes/stay'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as FoodRouteImport } from './routes/food'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -19,11 +20,19 @@ import { Route as AiRouteImport } from './routes/ai'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as SuccessRouteImport } from './routes/Success'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PlacesSlugRouteImport } from './routes/places.$slug'
+import { Route as HotelsSlugRouteImport } from './routes/hotels.$slug'
+import { Route as ApiWebsearchRouteImport } from './routes/api/websearch'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const StayRoute = StayRouteImport.update({
   id: '/stay',
   path: '/stay',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FoodRoute = FoodRouteImport.update({
@@ -71,6 +80,21 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlacesSlugRoute = PlacesSlugRouteImport.update({
+  id: '/places/$slug',
+  path: '/places/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HotelsSlugRoute = HotelsSlugRouteImport.update({
+  id: '/hotels/$slug',
+  path: '/hotels/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiWebsearchRoute = ApiWebsearchRouteImport.update({
+  id: '/api/websearch',
+  path: '/api/websearch',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
@@ -87,8 +111,12 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
   '/food': typeof FoodRoute
+  '/search': typeof SearchRoute
   '/stay': typeof StayRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/websearch': typeof ApiWebsearchRoute
+  '/hotels/$slug': typeof HotelsSlugRoute
+  '/places/$slug': typeof PlacesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -100,8 +128,12 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
   '/food': typeof FoodRoute
+  '/search': typeof SearchRoute
   '/stay': typeof StayRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/websearch': typeof ApiWebsearchRoute
+  '/hotels/$slug': typeof HotelsSlugRoute
+  '/places/$slug': typeof PlacesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -114,8 +146,12 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
   '/food': typeof FoodRoute
+  '/search': typeof SearchRoute
   '/stay': typeof StayRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/websearch': typeof ApiWebsearchRoute
+  '/hotels/$slug': typeof HotelsSlugRoute
+  '/places/$slug': typeof PlacesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -129,8 +165,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/explore'
     | '/food'
+    | '/search'
     | '/stay'
     | '/api/chat'
+    | '/api/websearch'
+    | '/hotels/$slug'
+    | '/places/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -142,8 +182,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/explore'
     | '/food'
+    | '/search'
     | '/stay'
     | '/api/chat'
+    | '/api/websearch'
+    | '/hotels/$slug'
+    | '/places/$slug'
   id:
     | '__root__'
     | '/'
@@ -155,8 +199,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/explore'
     | '/food'
+    | '/search'
     | '/stay'
     | '/api/chat'
+    | '/api/websearch'
+    | '/hotels/$slug'
+    | '/places/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -169,8 +217,12 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ExploreRoute: typeof ExploreRoute
   FoodRoute: typeof FoodRoute
+  SearchRoute: typeof SearchRoute
   StayRoute: typeof StayRoute
   ApiChatRoute: typeof ApiChatRoute
+  ApiWebsearchRoute: typeof ApiWebsearchRoute
+  HotelsSlugRoute: typeof HotelsSlugRoute
+  PlacesSlugRoute: typeof PlacesSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -180,6 +232,13 @@ declare module '@tanstack/react-router' {
       path: '/stay'
       fullPath: '/stay'
       preLoaderRoute: typeof StayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/food': {
@@ -245,6 +304,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/places/$slug': {
+      id: '/places/$slug'
+      path: '/places/$slug'
+      fullPath: '/places/$slug'
+      preLoaderRoute: typeof PlacesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hotels/$slug': {
+      id: '/hotels/$slug'
+      path: '/hotels/$slug'
+      fullPath: '/hotels/$slug'
+      preLoaderRoute: typeof HotelsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/websearch': {
+      id: '/api/websearch'
+      path: '/api/websearch'
+      fullPath: '/api/websearch'
+      preLoaderRoute: typeof ApiWebsearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/chat': {
       id: '/api/chat'
       path: '/api/chat'
@@ -265,8 +345,12 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ExploreRoute: ExploreRoute,
   FoodRoute: FoodRoute,
+  SearchRoute: SearchRoute,
   StayRoute: StayRoute,
   ApiChatRoute: ApiChatRoute,
+  ApiWebsearchRoute: ApiWebsearchRoute,
+  HotelsSlugRoute: HotelsSlugRoute,
+  PlacesSlugRoute: PlacesSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

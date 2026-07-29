@@ -7,13 +7,10 @@ import {
   Twitter, Youtube, Phone, Mail, Camera, Heart, Plus,
 } from "lucide-react";
 import heroImg from "@/assets/hero-dehradun.jpg";
-import robbers from "@/assets/place-robbers-cave.jpg";
-import sahastradhara from "@/assets/place-sahastradhara.jpg";
-import fri from "@/assets/place-fri.jpg";
-import mindrolling from "@/assets/place-mindrolling.jpg";
-import tapkeshwar from "@/assets/place-tapkeshwar.jpg";
-import maldevta from "@/assets/place-maldevta.jpg";
-import zoo from "@/assets/place-zoo.jpg";
+import { places, placeImages } from "@/data/places";
+import { hotels } from "@/data/hotels";
+
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -55,15 +52,6 @@ const categories = [
   { icon: HomeIcon, title: "Real Estate", desc: "Properties, rentals, builders and projects", tags: ["Rentals", "Buy"] },
 ];
 
-const places = [
-  { img: robbers, name: "Robber's Cave", desc: "Natural cave with a mysterious stream disappearing underground.", loc: "Anarwala, 8 km from center" },
-  { img: sahastradhara, name: "Sahastradhara", desc: "Sulphur springs cascading over limestone terraces.", loc: "Sahastradhara Rd, 14 km" },
-  { img: fri, name: "Forest Research Institute", desc: "Iconic colonial-era institute set in sprawling green campus.", loc: "Kaulagarh Rd, 6 km" },
-  { img: tapkeshwar, name: "Tapkeshwar Temple", desc: "Ancient Shiva shrine inside a cave with dripping spring water.", loc: "Garhi Cantt, 6 km" },
-  { img: mindrolling, name: "Mindrolling Monastery", desc: "Grand Tibetan monastery with a 60m golden stupa.", loc: "Clement Town, 10 km" },
-  { img: zoo, name: "Malsi Deer Park (Zoo)", desc: "Family-friendly mini zoo at the foothills of the Shivaliks.", loc: "Malsi, 10 km" },
-  { img: maldevta, name: "Maldevta", desc: "Riverside picnic spot with pine forests and hilltop trails.", loc: "Maldevta Rd, 15 km" },
-];
 
 const businesses = [
   { name: "Doon Darbar Restaurant", cat: "North Indian", area: "Rajpur Road", rating: 4.6, reviews: 1240 },
@@ -241,29 +229,64 @@ function Home() {
       <Section id="places" eyebrow="Featured places" title="Postcard-worthy spots to visit" cta={{ label: "See all places", href: "#" }} tone="muted">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {places.map((p) => (
-            <article key={p.name} className="group min-h-screen rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
-              <div className="relative aspect-[4/3] min-h-screen">
+            <article key={p.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
+              <div className="relative aspect-[4/3] overflow-hidden">
                 <img src={p.img} alt={p.name} loading="lazy" width={1024} height={768} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <button aria-label="Save" className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-foreground backdrop-blur hover:bg-white">
+                <button aria-label="Save" className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/90 text-foreground backdrop-blur hover:bg-white">
                   <Heart className="h-4 w-4" />
                 </button>
               </div>
-              <div className="p-5">
-                <h3 className="font-display text-lg font-semibold">{p.name}</h3>
-                <p className="mt-1.5 text-sm text-muted-foreground">{p.desc}</p>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-                    <MapPin className="h-3.5 w-3.5" /> {p.loc}
-                  </span>
-                  <a href="#" className="inline-flex items-center gap-1 text-sm font-semibold text-primary">
-                    Map <ChevronRight className="h-4 w-4" />
-                  </a>
-                </div>
+              <div className="flex flex-1 flex-col p-4">
+                <h3 className="font-display text-base font-semibold leading-tight">{p.name}</h3>
+                <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{p.desc}</p>
+                <span className="mt-2 inline-flex items-center gap-1.5 text-[11px] text-muted-foreground">
+                  <MapPin className="h-3 w-3" /> {p.loc}
+                </span>
+                <Link
+                  to="/places/$slug"
+                  params={{ slug: p.slug }}
+                  className="mt-3 inline-flex h-9 w-full items-center justify-center gap-1 rounded-xl bg-primary text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  View Details <ChevronRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </article>
+          ))}
+
+        </div>
+      </Section>
+
+      {/* HOTELS */}
+      <Section id="hotels" eyebrow="Hotels & stay" title="50+ hotels to stay in Dehradun">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {hotels.map((h) => (
+            <article key={h.slug} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img src={h.img} alt={h.name} loading="lazy" width={1024} height={768} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-semibold text-foreground backdrop-blur">
+                  <Star className="h-3 w-3 fill-current text-amber-500" /> {h.stars}-star
+                </span>
+              </div>
+              <div className="flex flex-1 flex-col p-4">
+                <h3 className="font-display text-base font-semibold leading-tight">{h.name}</h3>
+                <p className="mt-1 text-xs font-semibold text-primary">{h.price} / night</p>
+                <span className="mt-1.5 inline-flex items-center gap-1.5 text-[11px] text-muted-foreground">
+                  <MapPin className="h-3 w-3" /> {h.area}, Dehradun
+                </span>
+                <Link
+                  to="/hotels/$slug"
+                  params={{ slug: h.slug }}
+                  className="mt-3 inline-flex h-9 w-full items-center justify-center gap-1 rounded-xl bg-primary text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  View Details <ChevronRight className="h-3.5 w-3.5" />
+                </Link>
               </div>
             </article>
           ))}
         </div>
       </Section>
+
+
 
       {/* BUSINESS DIRECTORY */}
       <Section id="business" eyebrow="Local business directory" title="Find trusted businesses across Dehradun">
@@ -426,7 +449,7 @@ function Home() {
           {blogPosts.map((p, i) => (
             <a key={p.title} href="#" className="group block min-h-screen rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
               <div className="relative aspect-[16/10] min-h-screen gradient-forest">
-                <img src={[robbers, sahastradhara, maldevta][i]} alt="" loading="lazy" width={1024} height={640} className="h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" />
+                <img src={placeImages[i]} alt="" loading="lazy" width={1024} height={640} className="h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="p-5">
                 <div className="flex items-center gap-2 text-xs">
