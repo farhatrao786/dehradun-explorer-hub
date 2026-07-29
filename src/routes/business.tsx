@@ -5,7 +5,6 @@ export const Route = createFileRoute('/business')({
   component: BusinessPage,
 });
 
-// Aapka Supabase URL aur Key yahan set ho gaya hai 🚀
 const SUPABASE_URL = "https://wixyklziushvegjhmkes.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_TjJS7e8qwjCNMGtmeUOZKA_dS9mbE3R";
 
@@ -16,16 +15,15 @@ function BusinessPage() {
   const [shops, setShops] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Form states
   const [shopName, setShopName] = useState("");
   const [category, setCategory] = useState("");
   const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  // Database se data laane ka Direct API function
+  // 🔴 Yahan humne API ko bola hai ki sirf Approved data laye (&is_approved=eq.true)
   const fetchShops = async () => {
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/shops?select=*&order=created_at.desc`, {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/shops?select=*&is_approved=eq.true&order=created_at.desc`, {
         headers: {
           'apikey': SUPABASE_ANON_KEY,
           'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
@@ -50,7 +48,6 @@ function BusinessPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Form submit karke Direct API se data save karna
   const handleSubmitBusiness = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
@@ -68,6 +65,7 @@ function BusinessPage() {
           shop_name: shopName,
           category: category,
           phone: phone,
+          // Yahan hum is_approved nahi bhej rahe, taaki wo apne aap Supabase se 'false' set ho jaye
         })
       });
 
@@ -75,12 +73,12 @@ function BusinessPage() {
         const errorData = await response.json();
         alert('Error saving business: ' + errorData.message);
       } else {
-        alert('Business successfully listed!');
+        alert('Business successfully submitted! It will appear on the website once approved.');
         setShopName("");
         setCategory("");
         setPhone("");
         setShowForm(false);
-        fetchShops(); // Refresh list instantly
+        fetchShops(); 
       }
     } catch (err) {
       console.error('Error:', err);
@@ -94,7 +92,6 @@ function BusinessPage() {
     <div className="w-full bg-background px-4 py-12 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         
-        {/* Header Section */}
         <div 
           className={`text-center mb-10 transform transition-all duration-1000 ease-out ${
             isLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
@@ -115,7 +112,6 @@ function BusinessPage() {
           </button>
         </div>
 
-        {/* Database Connected Form */}
         {showForm && (
           <div className="max-w-lg mx-auto bg-card border border-border/50 shadow-2xl rounded-2xl p-8 mb-16 animate-in fade-in slide-in-from-top-4 duration-500">
             <h2 className="text-2xl font-bold mb-6 text-foreground text-center">Add Your Business</h2>
@@ -164,7 +160,7 @@ function BusinessPage() {
                   disabled={submitting} 
                   className="w-full rounded-lg bg-primary px-4 py-3 text-sm font-bold text-primary-foreground shadow-md transition-all hover:bg-primary/90 disabled:opacity-50"
                 >
-                  {submitting ? "Saving to Database..." : "Submit & Save to Database"}
+                  {submitting ? "Saving details..." : "Submit for Approval"}
                 </button>
 
                 <a 
@@ -180,12 +176,11 @@ function BusinessPage() {
           </div>
         )}
 
-        {/* Display Live Shops */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {loading ? (
-            <p className="text-center col-span-full text-muted-foreground">Loading businesses from database...</p>
+            <p className="text-center col-span-full text-muted-foreground">Loading businesses...</p>
           ) : shops.length === 0 ? (
-            <p className="text-center col-span-full text-muted-foreground">No businesses found in database yet. Add one!</p>
+            <p className="text-center col-span-full text-muted-foreground">No approved businesses found yet. Add one!</p>
           ) : (
             shops.map((business, index) => (
               <div 
@@ -220,7 +215,6 @@ function BusinessPage() {
           )}
         </div>
 
-        {/* Back Button */}
         <div 
           className={`text-center pb-8 transform transition-all duration-1000 delay-500 ease-out ${
             isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-90"
