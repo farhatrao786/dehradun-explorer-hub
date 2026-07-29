@@ -84,6 +84,8 @@ const blogPosts = [
 function Home() {
   const [menu, setMenu] = useState(false);
   const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
