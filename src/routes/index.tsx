@@ -155,7 +155,7 @@ function Home() {
             </p>
 
             {/* Search */}
-            <form onSubmit={(e) => e.preventDefault()} className="mt-8 flex flex-col gap-2 rounded-2xl border border-white/20 bg-white/95 p-2 shadow-2xl backdrop-blur sm:flex-row sm:items-center">
+            <form onSubmit={(e) => { e.preventDefault(); if (query.trim()) navigate({ to: "/search", search: { q: query.trim() } }); }} className="mt-8 flex flex-col gap-2 rounded-2xl border border-white/20 bg-white/95 p-2 shadow-2xl backdrop-blur sm:flex-row sm:items-center">
               <div className="flex flex-1 items-center gap-2 px-3">
                 <Search className="h-5 w-5 shrink-0 text-muted-foreground" />
                 <input
