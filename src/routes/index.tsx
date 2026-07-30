@@ -42,15 +42,16 @@ export const Route = createFileRoute("/")({
 });
 
 const categories = [
-  { icon: Mountain, title: "Explore Dehradun", desc: "Tourist places, hidden gems, weekend trips & adventure", tags: ["Sightseeing", "Adventure"] },
-  { icon: UtensilsCrossed, title: "Food & Restaurants", desc: "Cafes, restaurants, street food, bakeries & reviews", tags: ["Cafes", "Street Food"] },
-  { icon: BedDouble, title: "Hotels & Stay", desc: "Hotels, resorts, homestays, PGs and rentals", tags: ["Resorts", "PG"] },
-  { icon: HeartPulse, title: "Healthcare", desc: "Hospitals, doctors, clinics, pharmacies & emergency", tags: ["Doctors", "Emergency"] },
-  { icon: GraduationCap, title: "Education", desc: "Schools, colleges, coaching institutes & universities", tags: ["Schools", "Coaching"] },
-  { icon: ShoppingBag, title: "Shopping & Local", desc: "Shops, markets, services and local brands", tags: ["Markets", "Brands"] },
-  { icon: Car, title: "Transport", desc: "Taxi services, rentals and parking information", tags: ["Taxi", "Rentals"] },
-  { icon: HomeIcon, title: "Real Estate", desc: "Properties, rentals, builders and projects", tags: ["Rentals", "Buy"] },
+  { icon: Mountain, title: "Explore Dehradun", desc: "Tourist places, hidden gems, weekend trips & adventure", tags: ["Sightseeing", "Adventure"], href: "/explore" },
+  { icon: UtensilsCrossed, title: "Food & Restaurants", desc: "Cafes, restaurants, street food, bakeries & reviews", tags: ["Cafes", "Street Food"], href: "/food" },
+  { icon: BedDouble, title: "Hotels & Stay", desc: "Hotels, resorts, homestays, PGs and rentals", tags: ["Resorts", "PG"], href: "/stay" },
+  { icon: HeartPulse, title: "Healthcare", desc: "Hospitals, doctors, clinics, pharmacies & emergency", tags: ["Doctors", "Emergency"], href: "/search?q=hospital" },
+  { icon: GraduationCap, title: "Education", desc: "Schools, colleges, coaching institutes & universities", tags: ["Schools", "Coaching"], href: "/search?q=school" },
+  { icon: ShoppingBag, title: "Shopping & Local", desc: "Shops, markets, services and local brands", tags: ["Markets", "Brands"], href: "/search?q=shopping" },
+  { icon: Car, title: "Transport", desc: "Taxi services, rentals and parking information", tags: ["Taxi", "Rentals"], href: "/search?q=transport" },
+  { icon: HomeIcon, title: "Real Estate", desc: "Properties, rentals, builders and projects", tags: ["Rentals", "Buy"], href: "/search?q=real+estate" },
 ];
+
 
 
 const businesses = [
