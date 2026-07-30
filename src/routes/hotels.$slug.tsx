@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, MapPin, Star, IndianRupee, Check } from "lucide-react";
+import { ArrowLeft, MapPin, Star, IndianRupee, Check, ImageOff } from "lucide-react";
 import { getHotel, hotels } from "@/data/hotels";
 
 export const Route = createFileRoute("/hotels/$slug")({
@@ -39,6 +39,20 @@ function HotelNotFound() {
   );
 }
 
+// Reusable placeholder box — no image, just hotel name on a gradient background
+function HotelPlaceholder({ name, className = "" }: { name: string; className?: string }) {
+  return (
+    <div
+      className={`flex aspect-[4/3] w-full items-center justify-center rounded-2xl border border-border bg-gradient-to-br from-primary/20 to-primary/5 p-4 text-center ${className}`}
+    >
+      <div className="flex flex-col items-center gap-2">
+        <ImageOff className="h-6 w-6 text-primary/60" />
+        <span className="text-sm font-semibold text-foreground/80">{name}</span>
+      </div>
+    </div>
+  );
+}
+
 function HotelDetail() {
   const { hotel } = Route.useLoaderData();
   const others = hotels.filter((h) => h.slug !== hotel.slug && h.area === hotel.area).slice(0, 3);
@@ -59,11 +73,9 @@ function HotelDetail() {
           <span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> {hotel.area}</span>
         </div>
 
+        {/* Gallery replaced with a single placeholder box */}
         <div className="mt-6 grid gap-3 sm:grid-cols-3">
-          {hotel.gallery.map((g: string, i: number) => (
-            <img key={i} src={g} alt={`${hotel.name} photo ${i + 1}`} loading={i === 0 ? "eager" : "lazy"} width={1024} height={768}
-              className="aspect-[4/3] w-full rounded-2xl border border-border object-cover" />
-          ))}
+          <HotelPlaceholder name={hotel.name} className="sm:col-span-3" />
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-3">
@@ -80,7 +92,7 @@ function HotelDetail() {
               ))}
             </ul>
 
-            <a
+            
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hotel.name + " Dehradun")}`}
               target="_blank" rel="noopener noreferrer"
               className="mt-6 inline-flex h-10 items-center rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground"
@@ -111,7 +123,7 @@ function HotelDetail() {
             <div className="mt-4 grid gap-4 sm:grid-cols-3">
               {others.map((h) => (
                 <Link key={h.slug} to="/hotels/$slug" params={{ slug: h.slug }} className="group overflow-hidden rounded-2xl border border-border bg-card">
-                  <img src={h.img} alt={h.name} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <HotelPlaceholder name={h.name} />
                   <div className="p-3 text-sm font-semibold">{h.name}</div>
                 </Link>
               ))}
