@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import heroImg from "@/assets/hero-dehradun.jpg";
 import { places, placeImages } from "@/data/places";
-import { hotels } from "@/data/hotels";
+
 
 
 
@@ -42,15 +42,16 @@ export const Route = createFileRoute("/")({
 });
 
 const categories = [
-  { icon: Mountain, title: "Explore Dehradun", desc: "Tourist places, hidden gems, weekend trips & adventure", tags: ["Sightseeing", "Adventure"] },
-  { icon: UtensilsCrossed, title: "Food & Restaurants", desc: "Cafes, restaurants, street food, bakeries & reviews", tags: ["Cafes", "Street Food"] },
-  { icon: BedDouble, title: "Hotels & Stay", desc: "Hotels, resorts, homestays, PGs and rentals", tags: ["Resorts", "PG"] },
-  { icon: HeartPulse, title: "Healthcare", desc: "Hospitals, doctors, clinics, pharmacies & emergency", tags: ["Doctors", "Emergency"] },
-  { icon: GraduationCap, title: "Education", desc: "Schools, colleges, coaching institutes & universities", tags: ["Schools", "Coaching"] },
-  { icon: ShoppingBag, title: "Shopping & Local", desc: "Shops, markets, services and local brands", tags: ["Markets", "Brands"] },
-  { icon: Car, title: "Transport", desc: "Taxi services, rentals and parking information", tags: ["Taxi", "Rentals"] },
-  { icon: HomeIcon, title: "Real Estate", desc: "Properties, rentals, builders and projects", tags: ["Rentals", "Buy"] },
+  { icon: Mountain, title: "Explore Dehradun", desc: "Tourist places, hidden gems, weekend trips & adventure", tags: ["Sightseeing", "Adventure"], href: "/explore" },
+  { icon: UtensilsCrossed, title: "Food & Restaurants", desc: "Cafes, restaurants, street food, bakeries & reviews", tags: ["Cafes", "Street Food"], href: "/food" },
+  { icon: BedDouble, title: "Hotels & Stay", desc: "Hotels, resorts, homestays, PGs and rentals", tags: ["Resorts", "PG"], href: "/stay" },
+  { icon: HeartPulse, title: "Healthcare", desc: "Hospitals, doctors, clinics, pharmacies & emergency", tags: ["Doctors", "Emergency"], href: "/search?q=hospital" },
+  { icon: GraduationCap, title: "Education", desc: "Schools, colleges, coaching institutes & universities", tags: ["Schools", "Coaching"], href: "/search?q=school" },
+  { icon: ShoppingBag, title: "Shopping & Local", desc: "Shops, markets, services and local brands", tags: ["Markets", "Brands"], href: "/search?q=shopping" },
+  { icon: Car, title: "Transport", desc: "Taxi services, rentals and parking information", tags: ["Taxi", "Rentals"], href: "/search?q=transport" },
+  { icon: HomeIcon, title: "Real Estate", desc: "Properties, rentals, builders and projects", tags: ["Rentals", "Buy"], href: "/search?q=real+estate" },
 ];
+
 
 
 const businesses = [
@@ -209,14 +210,15 @@ function Home() {
       {/* CATEGORIES */}
       <Section id="explore" eyebrow="Browse the city" title="Everything Dehradun, in one place">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {categories.map(({ icon: Icon, title, desc, tags }) => (
-            <a key={title} href="#" className="group relative min-h-screen rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
-              <div className="mb-4 grid h-12 w-12 place-items-center rounded-xl gradient-forest text-primary-foreground">
-                <Icon className="h-6 w-6" />
+          {categories.map(({ icon: Icon, title, desc, tags, href }) => (
+            <a key={title} href={href} className="group relative rounded-2xl border border-border bg-card p-4 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
+              <div className="mb-3 grid h-10 w-10 place-items-center rounded-xl gradient-forest text-primary-foreground">
+                <Icon className="h-5 w-5" />
               </div>
-              <h3 className="font-display text-lg font-semibold">{title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{desc}</p>
-              <div className="mt-4 flex flex-wrap gap-1.5">
+              <h3 className="font-display text-base font-semibold">{title}</h3>
+              <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{desc}</p>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+
                 {tags.map((t) => (
                   <span key={t} className="rounded-full bg-secondary px-2.5 py-0.5 text-[11px] font-medium text-secondary-foreground">{t}</span>
                 ))}
@@ -258,35 +260,8 @@ function Home() {
         </div>
       </Section>
 
-      {/* HOTELS */}
-      <Section id="hotels" eyebrow="Hotels & stay" title="50+ hotels to stay in Dehradun">
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {hotels.map((h) => (
-            <article key={h.slug} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <img src={h.img} alt={h.name} loading="lazy" width={1024} height={768} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-semibold text-foreground backdrop-blur">
-                  <Star className="h-3 w-3 fill-current text-amber-500" /> {h.stars}-star
-                </span>
-              </div>
-              <div className="flex flex-1 flex-col p-4">
-                <h3 className="font-display text-base font-semibold leading-tight">{h.name}</h3>
-                <p className="mt-1 text-xs font-semibold text-primary">{h.price} / night</p>
-                <span className="mt-1.5 inline-flex items-center gap-1.5 text-[11px] text-muted-foreground">
-                  <MapPin className="h-3 w-3" /> {h.area}, Dehradun
-                </span>
-                <Link
-                  to="/hotels/$slug"
-                  params={{ slug: h.slug }}
-                  className="mt-3 inline-flex h-9 w-full items-center justify-center gap-1 rounded-xl bg-primary text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-                >
-                  View Details <ChevronRight className="h-3.5 w-3.5" />
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
+
+
 
 
 
