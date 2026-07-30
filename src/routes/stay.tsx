@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { MapPin, Star, ChevronRight } from "lucide-react";
+import { MapPin, Star, ChevronRight, ImageOff } from "lucide-react";
 import { hotels } from "@/data/hotels";
 
 export const Route = createFileRoute('/stay')({
@@ -16,6 +16,18 @@ export const Route = createFileRoute('/stay')({
   }),
   component: StayPage,
 });
+
+// Reusable placeholder box — no image, just hotel name on a gradient background
+function HotelPlaceholder({ name }: { name: string }) {
+  return (
+    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5 p-4 text-center">
+      <div className="flex flex-col items-center gap-2">
+        <ImageOff className="h-6 w-6 text-primary/60" />
+        <span className="text-sm font-semibold text-foreground/80">{name}</span>
+      </div>
+    </div>
+  );
+}
 
 function StayPage() {
   // Page khulte hi scroll ko top par rakhne ke liye
@@ -51,14 +63,7 @@ function StayPage() {
               className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img
-                  src={h.img}
-                  alt={h.name}
-                  loading="lazy"
-                  width={1024}
-                  height={768}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                <HotelPlaceholder name={h.name} />
                 <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-semibold text-foreground backdrop-blur">
                   <Star className="h-3 w-3 fill-current text-amber-500" /> {h.stars}-star
                 </span>
