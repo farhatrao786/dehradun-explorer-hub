@@ -260,35 +260,8 @@ function Home() {
         </div>
       </Section>
 
-      {/* HOTELS */}
-      <Section id="hotels" eyebrow="Hotels & stay" title="50+ hotels to stay in Dehradun">
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {hotels.map((h) => (
-            <article key={h.slug} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <img src={h.img} alt={h.name} loading="lazy" width={1024} height={768} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-semibold text-foreground backdrop-blur">
-                  <Star className="h-3 w-3 fill-current text-amber-500" /> {h.stars}-star
-                </span>
-              </div>
-              <div className="flex flex-1 flex-col p-4">
-                <h3 className="font-display text-base font-semibold leading-tight">{h.name}</h3>
-                <p className="mt-1 text-xs font-semibold text-primary">{h.price} / night</p>
-                <span className="mt-1.5 inline-flex items-center gap-1.5 text-[11px] text-muted-foreground">
-                  <MapPin className="h-3 w-3" /> {h.area}, Dehradun
-                </span>
-                <Link
-                  to="/hotels/$slug"
-                  params={{ slug: h.slug }}
-                  className="mt-3 inline-flex h-9 w-full items-center justify-center gap-1 rounded-xl bg-primary text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-                >
-                  View Details <ChevronRight className="h-3.5 w-3.5" />
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
+
+
 
 
 
