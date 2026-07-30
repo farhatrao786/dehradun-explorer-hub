@@ -210,10 +210,11 @@ function Home() {
       {/* CATEGORIES */}
       <Section id="explore" eyebrow="Browse the city" title="Everything Dehradun, in one place">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {categories.map(({ icon: Icon, title, desc, tags }) => (
-            <a key={title} href="#" className="group relative min-h-screen rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
-              <div className="mb-4 grid h-12 w-12 place-items-center rounded-xl gradient-forest text-primary-foreground">
-                <Icon className="h-6 w-6" />
+          {categories.map(({ icon: Icon, title, desc, tags, href }) => (
+            <a key={title} href={href} className="group relative rounded-2xl border border-border bg-card p-4 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
+              <div className="mb-3 grid h-10 w-10 place-items-center rounded-xl gradient-forest text-primary-foreground">
+                <Icon className="h-5 w-5" />
+
               </div>
               <h3 className="font-display text-lg font-semibold">{title}</h3>
               <p className="mt-1 text-sm text-muted-foreground">{desc}</p>
