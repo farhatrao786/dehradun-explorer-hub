@@ -92,9 +92,10 @@ function HotelDetail() {
               ))}
             </ul>
 
-            
+            <a
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hotel.name + " Dehradun")}`}
-              target="_blank" rel="noopener noreferrer"
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-6 inline-flex h-10 items-center rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground"
             >
               📍 Map par dekho

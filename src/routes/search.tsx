@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
-import { Search, MapPin, Star, ArrowLeft, Globe, ExternalLink } from "lucide-react";
+import { Search, MapPin, Star, ArrowLeft, Globe, ExternalLink, ImageOff } from "lucide-react";
 import { places } from "@/data/places";
 import { hotels } from "@/data/hotels";
 
@@ -24,6 +24,18 @@ export const Route = createFileRoute("/search")({
   }),
   component: SearchPage,
 });
+
+// Reusable placeholder box — no image, just name on a gradient background
+function HotelPlaceholder({ name }: { name: string }) {
+  return (
+    <div className="flex aspect-[4/3] w-full items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5 p-3 text-center">
+      <div className="flex flex-col items-center gap-1.5">
+        <ImageOff className="h-5 w-5 text-primary/60" />
+        <span className="text-xs font-semibold text-foreground/80">{name}</span>
+      </div>
+    </div>
+  );
+}
 
 const pages = [
   { title: "Explore Dehradun", to: "/explore", desc: "Tourist places, hidden gems and weekend trips." },
@@ -131,7 +143,7 @@ function SearchPage() {
             <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {hotelHits.map((h) => (
                 <Link key={h.slug} to="/hotels/$slug" params={{ slug: h.slug }} className="group overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-lg">
-                  <img src={h.img} alt={h.name} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <HotelPlaceholder name={h.name} />
                   <div className="p-3">
                     <h3 className="text-sm font-semibold">{h.name}</h3>
                     <p className="mt-0.5 text-[11px] font-semibold text-primary">{h.price}</p>
