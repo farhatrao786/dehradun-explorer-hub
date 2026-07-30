@@ -214,11 +214,11 @@ function Home() {
             <a key={title} href={href} className="group relative rounded-2xl border border-border bg-card p-4 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
               <div className="mb-3 grid h-10 w-10 place-items-center rounded-xl gradient-forest text-primary-foreground">
                 <Icon className="h-5 w-5" />
-
               </div>
-              <h3 className="font-display text-lg font-semibold">{title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{desc}</p>
-              <div className="mt-4 flex flex-wrap gap-1.5">
+              <h3 className="font-display text-base font-semibold">{title}</h3>
+              <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{desc}</p>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+
                 {tags.map((t) => (
                   <span key={t} className="rounded-full bg-secondary px-2.5 py-0.5 text-[11px] font-medium text-secondary-foreground">{t}</span>
                 ))}
