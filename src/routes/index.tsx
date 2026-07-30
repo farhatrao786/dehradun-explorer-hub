@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import heroImg from "@/assets/hero-dehradun.jpg";
 import { places, placeImages } from "@/data/places";
-import { hotels } from "@/data/hotels";
+
 
 
 
