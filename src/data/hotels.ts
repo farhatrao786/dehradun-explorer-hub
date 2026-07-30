@@ -2,8 +2,25 @@ import h1 from "@/assets/hotel-1.jpg";
 import h2 from "@/assets/hotel-2.jpg";
 import h3 from "@/assets/hotel-3.jpg";
 import h4 from "@/assets/hotel-4.jpg";
+import h5 from "@/assets/hotel-5.jpg";
+import h6 from "@/assets/hotel-6.jpg";
+import h7 from "@/assets/hotel-7.jpg";
+import h8 from "@/assets/hotel-8.jpg";
+import h9 from "@/assets/hotel-9.jpg";
+import h10 from "@/assets/hotel-10.jpg";
+import h11 from "@/assets/hotel-11.jpg";
+import h12 from "@/assets/hotel-12.jpg";
 
-export const hotelImages = [h1, h2, h3, h4];
+export const hotelImages = [h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12];
+
+// Tier-wise image pools so a 5-star resort never shows a budget room photo
+const imagePool: Record<number, string[]> = {
+  5: [h5, h6, h10, h12],
+  4: [h1, h9, h11, h12, h6],
+  3: [h7, h2, h3, h10],
+  2: [h8, h4, h7],
+};
+
 
 export type Hotel = {
   slug: string;
