@@ -109,17 +109,22 @@ const seeds: Seed[] = [
 const slugify = (s: string) =>
   s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-export const hotels: Hotel[] = seeds.map(([name, stars, price, area, desc], i) => ({
-  slug: slugify(name),
-  name,
-  stars,
-  price,
-  area,
-  desc,
-  img: hotelImages[i % hotelImages.length],
-  gallery: [hotelImages[i % hotelImages.length], hotelImages[(i + 1) % hotelImages.length], hotelImages[(i + 2) % hotelImages.length]],
-  address: `${name}, ${area}, Dehradun, Uttarakhand`,
-  amenities: tier(stars),
-}));
+export const hotels: Hotel[] = seeds.map(([name, stars, price, area, desc], i) => {
+  const pool = imagePool[stars] ?? imagePool[3];
+  const pick = (n: number) => pool[(i + n) % pool.length];
+  return {
+    slug: slugify(name),
+    name,
+    stars,
+    price,
+    area,
+    desc,
+    img: pick(0),
+    gallery: [pick(0), pick(1), pick(2)],
+    address: `${name}, ${area}, Dehradun, Uttarakhand`,
+    amenities: tier(stars),
+  };
+});
+
 
 export const getHotel = (slug: string) => hotels.find((h) => h.slug === slug);
