@@ -81,6 +81,16 @@ function StayPage() {
                 >
                   View Details <ChevronRight className="h-3.5 w-3.5" />
                 </Link>
+                {h.name.includes("Hyatt Regency") && (
+  <a
+    href="AAPKA_AGODA_AFFILIATE_LINK_YAHAN"
+    target="_blank"
+    rel="nofollow sponsored"
+    className="mt-2 inline-flex h-9 w-full items-center justify-center gap-2 rounded-xl bg-primary text-xs font-semibold text-white"
+  >
+    Book on Agoda
+  </a>
+)}
               </div>
             </article>
           ))}
