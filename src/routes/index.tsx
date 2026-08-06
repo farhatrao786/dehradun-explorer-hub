@@ -392,9 +392,10 @@ function Home() {
               ))}
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <button className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground">Create account</button>
-              <button className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold">Sign in</button>
+              <Link to="/join" className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground">Create account</Link>
+              <Link to="/join" className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold">Sign in</Link>
             </div>
+
           </div>
 
           <div id="list" className="relative min-h-screen rounded-3xl gradient-forest p-8 text-primary-foreground sm:p-10">
