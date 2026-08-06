@@ -424,7 +424,7 @@ function Home() {
       <Section id="blog" eyebrow="From the blog" title="Stories, guides & local knowledge" cta={{ label: "Read all posts", href: "#" }}>
         <div className="grid gap-6 md:grid-cols-3">
           {blogPosts.map((p, i) => (
-            <a key={p.title} href="#" className="group block min-h-screen rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
+            <a key={p.title} href="/blog" className="group block min-h-screen rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
               <div className="relative aspect-[16/10] min-h-screen gradient-forest">
                 <img src={placeImages[i]} alt="" loading="lazy" width={1024} height={640} className="h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" />
               </div>
