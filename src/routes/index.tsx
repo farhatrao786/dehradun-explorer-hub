@@ -267,16 +267,8 @@ function Home() {
 
       {/* BUSINESS DIRECTORY */}
       <Section id="business" eyebrow="Local business directory" title="Find trusted businesses across Dehradun">
-        <div className="mb-6 flex flex-col gap-2 rounded-2xl border border-border bg-card p-2 sm:flex-row">
-          <div className="flex flex-1 items-center gap-2 px-3">
-            <Search className="h-4 w-4 text-muted-foreground" />
-            <input placeholder="Search businesses by name or category" className="w-full min-w-0 bg-transparent py-2.5 text-sm focus:outline-none" />
-          </div>
-          <select className="rounded-xl bg-secondary px-3 py-2.5 text-sm">
-            <option>All areas</option><option>Rajpur Road</option><option>Clement Town</option><option>Sahastradhara Rd</option>
-          </select>
-          <button className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground">Search</button>
-        </div>
+        <BusinessSearch />
+
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {businesses.map((b) => (
