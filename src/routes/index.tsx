@@ -292,10 +292,11 @@ function Home() {
               </div>
               <p className="mt-3 text-xs text-muted-foreground">{b.reviews.toLocaleString()} reviews</p>
               <div className="mt-4 flex gap-2">
-                <button className="flex-1 rounded-lg bg-secondary py-2 text-xs font-medium hover:bg-secondary/80"><Phone className="mr-1 inline h-3 w-3" />Call</button>
-                <button className="flex-1 rounded-lg bg-secondary py-2 text-xs font-medium hover:bg-secondary/80"><MapPin className="mr-1 inline h-3 w-3" />Map</button>
-                <button className="flex-1 rounded-lg bg-primary py-2 text-xs font-semibold text-primary-foreground">View</button>
+                <a href="tel:+911352500000" className="flex-1 rounded-lg bg-secondary py-2 text-center text-xs font-medium hover:bg-secondary/80"><Phone className="mr-1 inline h-3 w-3" />Call</a>
+                <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(b.name + " Dehradun")}`} target="_blank" rel="noreferrer noopener" className="flex-1 rounded-lg bg-secondary py-2 text-center text-xs font-medium hover:bg-secondary/80"><MapPin className="mr-1 inline h-3 w-3" />Map</a>
+                <a href={`/search?q=${encodeURIComponent(b.name)}`} className="flex-1 rounded-lg bg-primary py-2 text-center text-xs font-semibold text-primary-foreground">View</a>
               </div>
+
             </div>
           ))}
         </div>
