@@ -126,11 +126,12 @@ function Home() {
           <div className="border-t border-border bg-background md:hidden">
             <div className="flex flex-col p-4">
               {["Explore", "Food", "Stay", "Business", "Blog"].map((l) => (
-                <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setMenu(false)} className="rounded-lg px-3 py-3 text-sm font-medium hover:bg-secondary">{l}</a>
+                <Link key={l} to={`/${l.toLowerCase()}`} onClick={() => setMenu(false)} className="rounded-lg px-3 py-3 text-sm font-medium hover:bg-secondary">{l}</Link>
               ))}
               <div className="mt-2 flex gap-2 border-t border-border pt-3">
-                <button className="flex-1 rounded-full border border-border px-4 py-2 text-sm font-medium">Sign in</button>
-                <a href="#list" className="flex-1 rounded-full bg-primary px-4 py-2 text-center text-sm font-semibold text-primary-foreground">List Business</a>
+                <Link to="/join" onClick={() => setMenu(false)} className="flex-1 rounded-full border border-border px-4 py-2 text-center text-sm font-medium">Sign in</Link>
+                <Link to="/business" onClick={() => setMenu(false)} className="flex-1 rounded-full bg-primary px-4 py-2 text-center text-sm font-semibold text-primary-foreground">List Business</Link>
+
               </div>
             </div>
           </div>
