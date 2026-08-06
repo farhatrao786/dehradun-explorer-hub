@@ -93,14 +93,15 @@ function Home() {
       {/* NAV */}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <a href="#" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <span className="grid h-9 w-9 place-items-center rounded-xl gradient-forest text-primary-foreground">
               <Mountain className="h-5 w-5" />
             </span>
             <span className="font-display text-xl font-semibold tracking-tight">
               The<span className="text-primary">Dehradun</span>
             </span>
-          </a>
+          </Link>
+
           <nav className="hidden items-center gap-8 md:flex">
             {["Explore", "Food", "Stay", "Business", "Blog"].map((l) => (
   <Link
@@ -114,7 +115,7 @@ function Home() {
 ))}
           </nav>
           <div className="hidden items-center gap-3 md:flex">
-            <button className="rounded-full px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary">Sign in</button>
+            <Link to="/join" className="rounded-full px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary">Sign in</Link>
             <Link to="/business" className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.05]">List Business</Link>
           </div>
           <button aria-label="Menu" onClick={() => setMenu(!menu)} className="grid h-10 w-10 place-items-center rounded-lg md:hidden">
@@ -125,11 +126,12 @@ function Home() {
           <div className="border-t border-border bg-background md:hidden">
             <div className="flex flex-col p-4">
               {["Explore", "Food", "Stay", "Business", "Blog"].map((l) => (
-                <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setMenu(false)} className="rounded-lg px-3 py-3 text-sm font-medium hover:bg-secondary">{l}</a>
+                <Link key={l} to={`/${l.toLowerCase()}`} onClick={() => setMenu(false)} className="rounded-lg px-3 py-3 text-sm font-medium hover:bg-secondary">{l}</Link>
               ))}
               <div className="mt-2 flex gap-2 border-t border-border pt-3">
-                <button className="flex-1 rounded-full border border-border px-4 py-2 text-sm font-medium">Sign in</button>
-                <a href="#list" className="flex-1 rounded-full bg-primary px-4 py-2 text-center text-sm font-semibold text-primary-foreground">List Business</a>
+                <Link to="/join" onClick={() => setMenu(false)} className="flex-1 rounded-full border border-border px-4 py-2 text-center text-sm font-medium">Sign in</Link>
+                <Link to="/business" onClick={() => setMenu(false)} className="flex-1 rounded-full bg-primary px-4 py-2 text-center text-sm font-semibold text-primary-foreground">List Business</Link>
+
               </div>
             </div>
           </div>
@@ -230,15 +232,14 @@ function Home() {
       </Section>
 
       {/* FEATURED PLACES */}
-      <Section id="places" eyebrow="Featured places" title="Postcard-worthy spots to visit" cta={{ label: "See all places", href: "#" }} tone="muted">
+      <Section id="places" eyebrow="Featured places" title="Postcard-worthy spots to visit" cta={{ label: "See all places", href: "/explore" }} tone="muted">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {places.map((p) => (
             <article key={p.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img src={p.img} alt={p.name} loading="lazy" width={1024} height={768} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <button aria-label="Save" className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/90 text-foreground backdrop-blur hover:bg-white">
-                  <Heart className="h-4 w-4" />
-                </button>
+                <SaveButton name={p.name} />
+
               </div>
               <div className="flex flex-1 flex-col p-4">
                 <h3 className="font-display text-base font-semibold leading-tight">{p.name}</h3>
@@ -267,16 +268,8 @@ function Home() {
 
       {/* BUSINESS DIRECTORY */}
       <Section id="business" eyebrow="Local business directory" title="Find trusted businesses across Dehradun">
-        <div className="mb-6 flex flex-col gap-2 rounded-2xl border border-border bg-card p-2 sm:flex-row">
-          <div className="flex flex-1 items-center gap-2 px-3">
-            <Search className="h-4 w-4 text-muted-foreground" />
-            <input placeholder="Search businesses by name or category" className="w-full min-w-0 bg-transparent py-2.5 text-sm focus:outline-none" />
-          </div>
-          <select className="rounded-xl bg-secondary px-3 py-2.5 text-sm">
-            <option>All areas</option><option>Rajpur Road</option><option>Clement Town</option><option>Sahastradhara Rd</option>
-          </select>
-          <button className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground">Search</button>
-        </div>
+        <BusinessSearch />
+
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {businesses.map((b) => (
@@ -292,10 +285,11 @@ function Home() {
               </div>
               <p className="mt-3 text-xs text-muted-foreground">{b.reviews.toLocaleString()} reviews</p>
               <div className="mt-4 flex gap-2">
-                <button className="flex-1 rounded-lg bg-secondary py-2 text-xs font-medium hover:bg-secondary/80"><Phone className="mr-1 inline h-3 w-3" />Call</button>
-                <button className="flex-1 rounded-lg bg-secondary py-2 text-xs font-medium hover:bg-secondary/80"><MapPin className="mr-1 inline h-3 w-3" />Map</button>
-                <button className="flex-1 rounded-lg bg-primary py-2 text-xs font-semibold text-primary-foreground">View</button>
+                <a href="tel:+911352500000" className="flex-1 rounded-lg bg-secondary py-2 text-center text-xs font-medium hover:bg-secondary/80"><Phone className="mr-1 inline h-3 w-3" />Call</a>
+                <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(b.name + " Dehradun")}`} target="_blank" rel="noreferrer noopener" className="flex-1 rounded-lg bg-secondary py-2 text-center text-xs font-medium hover:bg-secondary/80"><MapPin className="mr-1 inline h-3 w-3" />Map</a>
+                <a href={`/search?q=${encodeURIComponent(b.name)}`} className="flex-1 rounded-lg bg-primary py-2 text-center text-xs font-semibold text-primary-foreground">View</a>
               </div>
+
             </div>
           ))}
         </div>
@@ -351,7 +345,7 @@ function Home() {
               <p className="mt-1 text-sm opacity-90">{d.brand}</p>
               <div className="mt-6 flex items-center justify-between rounded-xl border border-dashed border-white/40 px-3 py-2">
                 <span className="font-mono text-sm font-semibold">{d.code}</span>
-                <button className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-foreground">Copy</button>
+                <CopyCodeButton code={d.code} />
               </div>
             </div>
           ))}
@@ -362,7 +356,7 @@ function Home() {
       <Section id="updates" eyebrow="Latest updates" title="What's happening in the Doon valley">
         <div className="grid gap-4 md:grid-cols-2">
           {updates.map(({ icon: Icon, tag, title, time }) => (
-            <a key={title} href="#" className="group flex items-start gap-4 rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
+            <a key={title} href={`/search?q=${encodeURIComponent(title)}`} className="group flex items-start gap-4 rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
               <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-secondary text-primary">
                 <Icon className="h-5 w-5" />
               </div>
@@ -392,9 +386,10 @@ function Home() {
               ))}
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <button className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground">Create account</button>
-              <button className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold">Sign in</button>
+              <Link to="/join" className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground">Create account</Link>
+              <Link to="/join" className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold">Sign in</Link>
             </div>
+
           </div>
 
           <div id="list" className="relative min-h-screen rounded-3xl gradient-forest p-8 text-primary-foreground sm:p-10">
@@ -421,10 +416,10 @@ function Home() {
       </section>
 
       {/* BLOG */}
-      <Section id="blog" eyebrow="From the blog" title="Stories, guides & local knowledge" cta={{ label: "Read all posts", href: "#" }}>
+      <Section id="blog" eyebrow="From the blog" title="Stories, guides & local knowledge" cta={{ label: "Read all posts", href: "/blog" }}>
         <div className="grid gap-6 md:grid-cols-3">
           {blogPosts.map((p, i) => (
-            <a key={p.title} href="#" className="group block min-h-screen rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
+            <a key={p.title} href="/blog" className="group block min-h-screen rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
               <div className="relative aspect-[16/10] min-h-screen gradient-forest">
                 <img src={placeImages[i]} alt="" loading="lazy" width={1024} height={640} className="h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" />
               </div>
@@ -449,10 +444,8 @@ function Home() {
           <Camera className="h-8 w-8 text-primary" />
           <h3 className="font-display text-2xl font-semibold sm:text-3xl text-balance">Get the Doon weekly — 5 great picks, every Friday</h3>
           <p className="max-w-xl text-sm text-muted-foreground">The best places, food, events and stories from Dehradun, curated by our editors.</p>
-          <form onSubmit={(e) => e.preventDefault()} className="flex w-full max-w-md flex-col gap-2 sm:flex-row">
-            <input placeholder="you@example.com" className="flex-1 rounded-full border border-border bg-background px-5 py-3 text-sm focus:border-primary focus:outline-none" />
-            <button className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground">Subscribe</button>
-          </form>
+          <NewsletterForm />
+
         </div>
       </section>
 
@@ -467,13 +460,31 @@ function Home() {
               </div>
               <p className="mt-4 text-sm text-muted-foreground max-w-xs">The complete digital platform for Dehradun city — discover, connect, and explore the Doon valley.</p>
               <div className="mt-5 flex gap-3">
-                {[Facebook, Instagram, Twitter, Youtube].map((I, i) => (
-                  <a key={i} href="#" className="grid h-9 w-9 place-items-center rounded-full border border-border bg-background hover:bg-primary hover:text-primary-foreground"><I className="h-4 w-4" /></a>
+                {[
+                  { I: Facebook, href: "https://www.facebook.com/" },
+                  { I: Instagram, href: "https://www.instagram.com/" },
+                  { I: Twitter, href: "https://twitter.com/" },
+                  { I: Youtube, href: "https://www.youtube.com/" },
+                ].map(({ I, href }) => (
+                  <a key={href} href={href} target="_blank" rel="noreferrer noopener" aria-label="Social link" className="grid h-9 w-9 place-items-center rounded-full border border-border bg-background hover:bg-primary hover:text-primary-foreground"><I className="h-4 w-4" /></a>
                 ))}
               </div>
             </div>
-            <FooterCol title="Explore" links={["Tourist places", "Food & Restaurants", "Hotels & Stay", "Healthcare", "Education"]} />
-            <FooterCol title="Business" links={["List your business", "Advertise", "Premium listing", "Business login", "Contact sales"]} />
+            <FooterCol title="Explore" links={[
+              { label: "Tourist places", href: "/explore" },
+              { label: "Food & Restaurants", href: "/food" },
+              { label: "Hotels & Stay", href: "/stay" },
+              { label: "Healthcare", href: "/search?q=hospital" },
+              { label: "Education", href: "/search?q=school" },
+            ]} />
+            <FooterCol title="Business" links={[
+              { label: "List your business", href: "/business" },
+              { label: "Advertise", href: "/contact" },
+              { label: "Premium listing", href: "/business" },
+              { label: "Business login", href: "/join" },
+              { label: "Contact sales", href: "/contact" },
+            ]} />
+
             <div className="flex flex-col gap-2">
   <span className="font-semibold text-white">Company</span>
   <Link to="/about" className="text-sm opacity-80 hover:opacity-100">About us</Link>
@@ -518,15 +529,103 @@ function Section({
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: string[] }) {
+function FooterCol({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
     <div>
       <h4 className="font-display text-sm font-semibold uppercase tracking-widest text-foreground">{title}</h4>
       <ul className="mt-4 space-y-2.5">
         {links.map((l) => (
-          <li key={l}><a href="#" className="text-sm text-muted-foreground hover:text-foreground">{l}</a></li>
+          <li key={l.label}><a href={l.href} className="text-sm text-muted-foreground hover:text-foreground">{l.label}</a></li>
         ))}
       </ul>
     </div>
+  );
+}
+
+
+function SaveButton({ name }: { name: string }) {
+  const [saved, setSaved] = useState(false);
+  return (
+    <button
+      aria-label={saved ? `Remove ${name} from saved` : `Save ${name}`}
+      aria-pressed={saved}
+      onClick={() => setSaved((s) => !s)}
+      className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/90 text-foreground backdrop-blur hover:bg-white"
+    >
+      <Heart className={`h-4 w-4 ${saved ? "fill-current text-primary" : ""}`} />
+    </button>
+  );
+}
+
+function BusinessSearch() {
+  const navigate = useNavigate();
+  const [q, setQ] = useState("");
+  const [area, setArea] = useState("All areas");
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        const term = [q, area !== "All areas" ? area : ""].filter(Boolean).join(" ").trim();
+        navigate({ to: "/search", search: { q: term || "business in Dehradun" } });
+      }}
+      className="mb-6 flex flex-col gap-2 rounded-2xl border border-border bg-card p-2 sm:flex-row"
+    >
+      <div className="flex flex-1 items-center gap-2 px-3">
+        <Search className="h-4 w-4 text-muted-foreground" />
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Search businesses by name or category"
+          className="w-full min-w-0 bg-transparent py-2.5 text-sm focus:outline-none"
+        />
+      </div>
+      <select value={area} onChange={(e) => setArea(e.target.value)} className="rounded-xl bg-secondary px-3 py-2.5 text-sm">
+        <option>All areas</option><option>Rajpur Road</option><option>Clement Town</option><option>Sahastradhara Rd</option>
+      </select>
+      <button type="submit" className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground">Search</button>
+    </form>
+  );
+}
+
+function CopyCodeButton({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      onClick={async () => {
+        try {
+          await navigator.clipboard.writeText(code);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        } catch { /* clipboard unavailable */ }
+      }}
+      className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-foreground"
+    >
+      {copied ? "Copied!" : "Copy"}
+    </button>
+  );
+}
+
+function NewsletterForm() {
+  const [email, setEmail] = useState("");
+  const [sent, setSent] = useState(false);
+  if (sent) {
+    return (
+      <p className="rounded-full bg-primary/10 px-6 py-3 text-sm font-semibold text-primary">
+        You're subscribed — see you Friday! 🎉
+      </p>
+    );
+  }
+  return (
+    <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="flex w-full max-w-md flex-col gap-2 sm:flex-row">
+      <input
+        required
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="you@example.com"
+        className="flex-1 rounded-full border border-border bg-background px-5 py-3 text-sm focus:border-primary focus:outline-none"
+      />
+      <button type="submit" className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground">Subscribe</button>
+    </form>
   );
 }
