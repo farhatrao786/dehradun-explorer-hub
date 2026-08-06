@@ -236,9 +236,8 @@ function Home() {
             <article key={p.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img src={p.img} alt={p.name} loading="lazy" width={1024} height={768} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <button aria-label="Save" className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/90 text-foreground backdrop-blur hover:bg-white">
-                  <Heart className="h-4 w-4" />
-                </button>
+                <SaveButton name={p.name} />
+
               </div>
               <div className="flex flex-1 flex-col p-4">
                 <h3 className="font-display text-base font-semibold leading-tight">{p.name}</h3>
