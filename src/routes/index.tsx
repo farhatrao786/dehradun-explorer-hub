@@ -362,7 +362,7 @@ function Home() {
       <Section id="updates" eyebrow="Latest updates" title="What's happening in the Doon valley">
         <div className="grid gap-4 md:grid-cols-2">
           {updates.map(({ icon: Icon, tag, title, time }) => (
-            <a key={title} href="#" className="group flex items-start gap-4 rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
+            <a key={title} href={`/search?q=${encodeURIComponent(title)}`} className="group flex items-start gap-4 rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
               <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-secondary text-primary">
                 <Icon className="h-5 w-5" />
               </div>
