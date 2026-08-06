@@ -449,10 +449,8 @@ function Home() {
           <Camera className="h-8 w-8 text-primary" />
           <h3 className="font-display text-2xl font-semibold sm:text-3xl text-balance">Get the Doon weekly — 5 great picks, every Friday</h3>
           <p className="max-w-xl text-sm text-muted-foreground">The best places, food, events and stories from Dehradun, curated by our editors.</p>
-          <form onSubmit={(e) => e.preventDefault()} className="flex w-full max-w-md flex-col gap-2 sm:flex-row">
-            <input placeholder="you@example.com" className="flex-1 rounded-full border border-border bg-background px-5 py-3 text-sm focus:border-primary focus:outline-none" />
-            <button className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground">Subscribe</button>
-          </form>
+          <NewsletterForm />
+
         </div>
       </section>
 
