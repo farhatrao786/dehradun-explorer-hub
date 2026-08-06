@@ -421,7 +421,7 @@ function Home() {
       </section>
 
       {/* BLOG */}
-      <Section id="blog" eyebrow="From the blog" title="Stories, guides & local knowledge" cta={{ label: "Read all posts", href: "#" }}>
+      <Section id="blog" eyebrow="From the blog" title="Stories, guides & local knowledge" cta={{ label: "Read all posts", href: "/blog" }}>
         <div className="grid gap-6 md:grid-cols-3">
           {blogPosts.map((p, i) => (
             <a key={p.title} href="/blog" className="group block min-h-screen rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
