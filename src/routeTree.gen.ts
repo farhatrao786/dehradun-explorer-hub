@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as StayRouteImport } from './routes/stay'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as JoinRouteImport } from './routes/join'
 import { Route as FoodRouteImport } from './routes/food'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -33,6 +34,11 @@ const StayRoute = StayRouteImport.update({
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JoinRoute = JoinRouteImport.update({
+  id: '/join',
+  path: '/join',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FoodRoute = FoodRouteImport.update({
@@ -111,6 +117,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
   '/food': typeof FoodRoute
+  '/join': typeof JoinRoute
   '/search': typeof SearchRoute
   '/stay': typeof StayRoute
   '/api/chat': typeof ApiChatRoute
@@ -128,6 +135,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
   '/food': typeof FoodRoute
+  '/join': typeof JoinRoute
   '/search': typeof SearchRoute
   '/stay': typeof StayRoute
   '/api/chat': typeof ApiChatRoute
@@ -146,6 +154,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
   '/food': typeof FoodRoute
+  '/join': typeof JoinRoute
   '/search': typeof SearchRoute
   '/stay': typeof StayRoute
   '/api/chat': typeof ApiChatRoute
@@ -165,6 +174,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/explore'
     | '/food'
+    | '/join'
     | '/search'
     | '/stay'
     | '/api/chat'
@@ -182,6 +192,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/explore'
     | '/food'
+    | '/join'
     | '/search'
     | '/stay'
     | '/api/chat'
@@ -199,6 +210,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/explore'
     | '/food'
+    | '/join'
     | '/search'
     | '/stay'
     | '/api/chat'
@@ -217,6 +229,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ExploreRoute: typeof ExploreRoute
   FoodRoute: typeof FoodRoute
+  JoinRoute: typeof JoinRoute
   SearchRoute: typeof SearchRoute
   StayRoute: typeof StayRoute
   ApiChatRoute: typeof ApiChatRoute
@@ -239,6 +252,13 @@ declare module '@tanstack/react-router' {
       path: '/search'
       fullPath: '/search'
       preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/join': {
+      id: '/join'
+      path: '/join'
+      fullPath: '/join'
+      preLoaderRoute: typeof JoinRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/food': {
@@ -345,6 +365,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ExploreRoute: ExploreRoute,
   FoodRoute: FoodRoute,
+  JoinRoute: JoinRoute,
   SearchRoute: SearchRoute,
   StayRoute: StayRoute,
   ApiChatRoute: ApiChatRoute,
