@@ -467,13 +467,31 @@ function Home() {
               </div>
               <p className="mt-4 text-sm text-muted-foreground max-w-xs">The complete digital platform for Dehradun city — discover, connect, and explore the Doon valley.</p>
               <div className="mt-5 flex gap-3">
-                {[Facebook, Instagram, Twitter, Youtube].map((I, i) => (
-                  <a key={i} href="#" className="grid h-9 w-9 place-items-center rounded-full border border-border bg-background hover:bg-primary hover:text-primary-foreground"><I className="h-4 w-4" /></a>
+                {[
+                  { I: Facebook, href: "https://www.facebook.com/" },
+                  { I: Instagram, href: "https://www.instagram.com/" },
+                  { I: Twitter, href: "https://twitter.com/" },
+                  { I: Youtube, href: "https://www.youtube.com/" },
+                ].map(({ I, href }) => (
+                  <a key={href} href={href} target="_blank" rel="noreferrer noopener" aria-label="Social link" className="grid h-9 w-9 place-items-center rounded-full border border-border bg-background hover:bg-primary hover:text-primary-foreground"><I className="h-4 w-4" /></a>
                 ))}
               </div>
             </div>
-            <FooterCol title="Explore" links={["Tourist places", "Food & Restaurants", "Hotels & Stay", "Healthcare", "Education"]} />
-            <FooterCol title="Business" links={["List your business", "Advertise", "Premium listing", "Business login", "Contact sales"]} />
+            <FooterCol title="Explore" links={[
+              { label: "Tourist places", href: "/explore" },
+              { label: "Food & Restaurants", href: "/food" },
+              { label: "Hotels & Stay", href: "/stay" },
+              { label: "Healthcare", href: "/search?q=hospital" },
+              { label: "Education", href: "/search?q=school" },
+            ]} />
+            <FooterCol title="Business" links={[
+              { label: "List your business", href: "/business" },
+              { label: "Advertise", href: "/contact" },
+              { label: "Premium listing", href: "/business" },
+              { label: "Business login", href: "/join" },
+              { label: "Contact sales", href: "/contact" },
+            ]} />
+
             <div className="flex flex-col gap-2">
   <span className="font-semibold text-white">Company</span>
   <Link to="/about" className="text-sm opacity-80 hover:opacity-100">About us</Link>
