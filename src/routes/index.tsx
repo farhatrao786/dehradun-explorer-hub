@@ -542,3 +542,90 @@ function FooterCol({ title, links }: { title: string; links: { label: string; hr
   );
 }
 
+
+function SaveButton({ name }: { name: string }) {
+  const [saved, setSaved] = useState(false);
+  return (
+    <button
+      aria-label={saved ? `Remove ${name} from saved` : `Save ${name}`}
+      aria-pressed={saved}
+      onClick={() => setSaved((s) => !s)}
+      className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/90 text-foreground backdrop-blur hover:bg-white"
+    >
+      <Heart className={`h-4 w-4 ${saved ? "fill-current text-primary" : ""}`} />
+    </button>
+  );
+}
+
+function BusinessSearch() {
+  const navigate = useNavigate();
+  const [q, setQ] = useState("");
+  const [area, setArea] = useState("All areas");
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        const term = [q, area !== "All areas" ? area : ""].filter(Boolean).join(" ").trim();
+        navigate({ to: "/search", search: { q: term || "business in Dehradun" } });
+      }}
+      className="mb-6 flex flex-col gap-2 rounded-2xl border border-border bg-card p-2 sm:flex-row"
+    >
+      <div className="flex flex-1 items-center gap-2 px-3">
+        <Search className="h-4 w-4 text-muted-foreground" />
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Search businesses by name or category"
+          className="w-full min-w-0 bg-transparent py-2.5 text-sm focus:outline-none"
+        />
+      </div>
+      <select value={area} onChange={(e) => setArea(e.target.value)} className="rounded-xl bg-secondary px-3 py-2.5 text-sm">
+        <option>All areas</option><option>Rajpur Road</option><option>Clement Town</option><option>Sahastradhara Rd</option>
+      </select>
+      <button type="submit" className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground">Search</button>
+    </form>
+  );
+}
+
+function CopyCodeButton({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      onClick={async () => {
+        try {
+          await navigator.clipboard.writeText(code);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        } catch { /* clipboard unavailable */ }
+      }}
+      className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-foreground"
+    >
+      {copied ? "Copied!" : "Copy"}
+    </button>
+  );
+}
+
+function NewsletterForm() {
+  const [email, setEmail] = useState("");
+  const [sent, setSent] = useState(false);
+  if (sent) {
+    return (
+      <p className="rounded-full bg-primary/10 px-6 py-3 text-sm font-semibold text-primary">
+        You're subscribed — see you Friday! 🎉
+      </p>
+    );
+  }
+  return (
+    <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="flex w-full max-w-md flex-col gap-2 sm:flex-row">
+      <input
+        required
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="you@example.com"
+        className="flex-1 rounded-full border border-border bg-background px-5 py-3 text-sm focus:border-primary focus:outline-none"
+      />
+      <button type="submit" className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground">Subscribe</button>
+    </form>
+  );
+}
