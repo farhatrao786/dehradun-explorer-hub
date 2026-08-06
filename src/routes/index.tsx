@@ -100,7 +100,8 @@ function Home() {
             <span className="font-display text-xl font-semibold tracking-tight">
               The<span className="text-primary">Dehradun</span>
             </span>
-          </a>
+          </Link>
+
           <nav className="hidden items-center gap-8 md:flex">
             {["Explore", "Food", "Stay", "Business", "Blog"].map((l) => (
   <Link
