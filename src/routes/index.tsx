@@ -351,7 +351,7 @@ function Home() {
               <p className="mt-1 text-sm opacity-90">{d.brand}</p>
               <div className="mt-6 flex items-center justify-between rounded-xl border border-dashed border-white/40 px-3 py-2">
                 <span className="font-mono text-sm font-semibold">{d.code}</span>
-                <button className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-foreground">Copy</button>
+                <CopyCodeButton code={d.code} />
               </div>
             </div>
           ))}
