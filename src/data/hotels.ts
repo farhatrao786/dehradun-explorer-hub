@@ -152,8 +152,9 @@ const slugify = (s: string) =>
   s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 export const hotels: Hotel[] = seeds.map(([name, stars, price, area, desc], i) => {
-  const pool = imagePool[stars] ?? imagePool[3];
-  const pick = (n: number) => pool[(i + n) % pool.length];
+  const img = hotelImages[i % hotelImages.length];
+  const pick = (n: number) => hotelImages[(i + n * 7) % hotelImages.length];
+
   return {
     slug: slugify(name),
     name,
