@@ -162,8 +162,8 @@ export const hotels: Hotel[] = seeds.map(([name, stars, price, area, desc], i) =
     price,
     area,
     desc,
-    img: pick(0),
-    gallery: [pick(0), pick(1), pick(2)],
+    img,
+    gallery: [img, pick(1), pick(2)],
     address: `${name}, ${area}, Dehradun, Uttarakhand`,
     amenities: tier(stars),
   };
