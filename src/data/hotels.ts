@@ -10,16 +10,58 @@ import h9 from "@/assets/hotel-9.jpg";
 import h10 from "@/assets/hotel-10.jpg";
 import h11 from "@/assets/hotel-11.jpg";
 import h12 from "@/assets/hotel-12.jpg";
+import h13 from "@/assets/hotel-13.jpg";
+import h14 from "@/assets/hotel-14.jpg";
+import h15 from "@/assets/hotel-15.jpg";
+import h16 from "@/assets/hotel-16.jpg";
+import h17 from "@/assets/hotel-17.jpg";
+import h18 from "@/assets/hotel-18.jpg";
+import h19 from "@/assets/hotel-19.jpg";
+import h20 from "@/assets/hotel-20.jpg";
+import h21 from "@/assets/hotel-21.jpg";
+import h22 from "@/assets/hotel-22.jpg";
+import h23 from "@/assets/hotel-23.jpg";
+import h24 from "@/assets/hotel-24.jpg";
+import h25 from "@/assets/hotel-25.jpg";
+import h26 from "@/assets/hotel-26.jpg";
+import h27 from "@/assets/hotel-27.jpg";
+import h28 from "@/assets/hotel-28.jpg";
+import h29 from "@/assets/hotel-29.jpg";
+import h30 from "@/assets/hotel-30.jpg";
+import h31 from "@/assets/hotel-31.jpg";
+import h32 from "@/assets/hotel-32.jpg";
+import h33 from "@/assets/hotel-33.jpg";
+import h34 from "@/assets/hotel-34.jpg";
+import h35 from "@/assets/hotel-35.jpg";
+import h36 from "@/assets/hotel-36.jpg";
+import h37 from "@/assets/hotel-37.jpg";
+import h38 from "@/assets/hotel-38.jpg";
+import h39 from "@/assets/hotel-39.jpg";
+import h40 from "@/assets/hotel-40.jpg";
+import h41 from "@/assets/hotel-41.jpg";
+import h42 from "@/assets/hotel-42.jpg";
+import h43 from "@/assets/hotel-43.jpg";
+import h44 from "@/assets/hotel-44.jpg";
+import h45 from "@/assets/hotel-45.jpg";
+import h46 from "@/assets/hotel-46.jpg";
+import h47 from "@/assets/hotel-47.jpg";
+import h48 from "@/assets/hotel-48.jpg";
+import h49 from "@/assets/hotel-49.jpg";
+import h50 from "@/assets/hotel-50.jpg";
+import h51 from "@/assets/hotel-51.jpg";
+import h52 from "@/assets/hotel-52.jpg";
 
-export const hotelImages = [h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12];
+// One unique cover image per hotel, ordered so luxury properties get the
+// premium shots and budget stays get simpler rooms.
+export const hotelImages = [
+  h5, h6, h10, h12, h19, h27, h38, h22, h45, h29,
+  h1, h9, h11, h33, h16, h30, h21, h25, h42, h34,
+  h48, h39, h41, h37, h20, h32, h13, h15, h17, h47,
+  h50, h43, h7, h2, h3, h26, h23, h51, h46, h14,
+  h28, h49, h24, h36, h8, h4, h18, h31, h35, h44,
+  h40, h52,
+];
 
-// Tier-wise image pools so a 5-star resort never shows a budget room photo
-const imagePool: Record<number, string[]> = {
-  5: [h5, h6, h10, h12],
-  4: [h1, h9, h11, h12, h6],
-  3: [h7, h2, h3, h10],
-  2: [h8, h4, h7],
-};
 
 
 export type Hotel = {
