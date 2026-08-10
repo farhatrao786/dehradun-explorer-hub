@@ -122,6 +122,23 @@ function Home() {
             {menu ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
+        {/* Always-visible mobile nav row */}
+        <div className="border-t border-border/60 md:hidden">
+          <nav className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-3 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {["Explore", "Food", "Stay", "Blog", "Business"].map((l) => (
+              <Link
+                key={l}
+                to={`/${l.toLowerCase()}`}
+                className="whitespace-nowrap rounded-full bg-secondary px-3 py-1.5 text-xs font-medium text-secondary-foreground"
+              >
+                {l === "Business" ? "List Your Business" : l === "Blog" ? "Blogs" : l}
+              </Link>
+            ))}
+            <Link to="/join" className="whitespace-nowrap rounded-full border border-border px-3 py-1.5 text-xs font-medium">
+              Sign In
+            </Link>
+          </nav>
+        </div>
         {menu && (
           <div className="border-t border-border bg-background md:hidden">
             <div className="flex flex-col p-4">
@@ -139,7 +156,8 @@ function Home() {
       </header>
 
       {/* HERO */}
-      <section className="relative isolate flex min-h-[100svh] items-center min-h-screen pt-16">
+      <section className="relative isolate flex min-h-[100svh] items-center pt-28 md:pt-16">
+
         <img
           src={heroImg}
           alt="Dehradun valley at golden hour with mountains and forest"
