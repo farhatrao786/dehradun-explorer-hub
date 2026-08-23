@@ -155,9 +155,16 @@ function Home() {
         {menu && (
           <div className="border-t border-border bg-background md:hidden">
             <div className="flex flex-col p-4">
-              {["Explore", "Food", "Stay", "Business", "Blog"].map((l) => (
-                <Link key={l} to={`/${l.toLowerCase()}`} onClick={() => setMenu(false)} className="rounded-lg px-3 py-3 text-sm font-medium hover:bg-secondary">{l}</Link>
+              {([
+                { label: "Explore", to: "/explore" },
+                { label: "Food", to: "/food" },
+                { label: "Stay", to: "/stay" },
+                { label: "Business", to: "/business" },
+                { label: "Blog", to: "/blog" },
+              ] as const).map((l) => (
+                <Link key={l.label} to={l.to} onClick={() => setMenu(false)} className="rounded-lg px-3 py-3 text-sm font-medium hover:bg-secondary">{l.label}</Link>
               ))}
+
               <div className="mt-2 flex gap-2 border-t border-border pt-3">
                 <Link to="/join" onClick={() => setMenu(false)} className="flex-1 rounded-full border border-border px-4 py-2 text-center text-sm font-medium">Sign in</Link>
                 <Link to="/business" onClick={() => setMenu(false)} className="flex-1 rounded-full bg-primary px-4 py-2 text-center text-sm font-semibold text-primary-foreground">List Business</Link>
