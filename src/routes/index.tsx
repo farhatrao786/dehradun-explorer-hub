@@ -103,17 +103,23 @@ function Home() {
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex">
-            {["Explore", "Food", "Stay", "Business", "Blog"].map((l) => (
-  <Link
-    key={l}
-    to={["Explore", "Food", "Stay", "Business", "Blog"].includes(l) ? `/${l.toLowerCase()}` : `#${l.toLowerCase()}`}
-
-    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-  >
-    {l}
-  </Link>
-))}
+            {([
+              { label: "Explore", to: "/explore" },
+              { label: "Food", to: "/food" },
+              { label: "Stay", to: "/stay" },
+              { label: "Business", to: "/business" },
+              { label: "Blog", to: "/blog" },
+            ] as const).map((l) => (
+              <Link
+                key={l.label}
+                to={l.to}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {l.label}
+              </Link>
+            ))}
           </nav>
+
           <div className="hidden items-center gap-3 md:flex">
             <Link to="/join" className="rounded-full px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary">Sign in</Link>
             <Link to="/business" className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.05]">List Business</Link>
