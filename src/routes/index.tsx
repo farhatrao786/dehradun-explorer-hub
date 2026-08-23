@@ -103,17 +103,23 @@ function Home() {
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex">
-            {["Explore", "Food", "Stay", "Business", "Blog"].map((l) => (
-  <Link
-    key={l}
-    to={["Explore", "Food", "Stay", "Business", "Blog"].includes(l) ? `/${l.toLowerCase()}` : `#${l.toLowerCase()}`}
-
-    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-  >
-    {l}
-  </Link>
-))}
+            {([
+              { label: "Explore", to: "/explore" },
+              { label: "Food", to: "/food" },
+              { label: "Stay", to: "/stay" },
+              { label: "Business", to: "/business" },
+              { label: "Blog", to: "/blog" },
+            ] as const).map((l) => (
+              <Link
+                key={l.label}
+                to={l.to}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {l.label}
+              </Link>
+            ))}
           </nav>
+
           <div className="hidden items-center gap-3 md:flex">
             <Link to="/join" className="rounded-full px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary">Sign in</Link>
             <Link to="/business" className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.05]">List Business</Link>
@@ -125,15 +131,22 @@ function Home() {
         {/* Always-visible mobile nav row */}
         <div className="border-t border-border/60 md:hidden">
           <nav className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-3 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {["Explore", "Food", "Stay", "Blog", "Business"].map((l) => (
+            {([
+              { label: "Explore", to: "/explore" },
+              { label: "Food", to: "/food" },
+              { label: "Stay", to: "/stay" },
+              { label: "Blogs", to: "/blog" },
+              { label: "List Your Business", to: "/business" },
+            ] as const).map((l) => (
               <Link
-                key={l}
-                to={`/${l.toLowerCase()}`}
+                key={l.label}
+                to={l.to}
                 className="whitespace-nowrap rounded-full bg-secondary px-3 py-1.5 text-xs font-medium text-secondary-foreground"
               >
-                {l === "Business" ? "List Your Business" : l === "Blog" ? "Blogs" : l}
+                {l.label}
               </Link>
             ))}
+
             <Link to="/join" className="whitespace-nowrap rounded-full border border-border px-3 py-1.5 text-xs font-medium">
               Sign In
             </Link>
@@ -142,9 +155,16 @@ function Home() {
         {menu && (
           <div className="border-t border-border bg-background md:hidden">
             <div className="flex flex-col p-4">
-              {["Explore", "Food", "Stay", "Business", "Blog"].map((l) => (
-                <Link key={l} to={`/${l.toLowerCase()}`} onClick={() => setMenu(false)} className="rounded-lg px-3 py-3 text-sm font-medium hover:bg-secondary">{l}</Link>
+              {([
+                { label: "Explore", to: "/explore" },
+                { label: "Food", to: "/food" },
+                { label: "Stay", to: "/stay" },
+                { label: "Business", to: "/business" },
+                { label: "Blog", to: "/blog" },
+              ] as const).map((l) => (
+                <Link key={l.label} to={l.to} onClick={() => setMenu(false)} className="rounded-lg px-3 py-3 text-sm font-medium hover:bg-secondary">{l.label}</Link>
               ))}
+
               <div className="mt-2 flex gap-2 border-t border-border pt-3">
                 <Link to="/join" onClick={() => setMenu(false)} className="flex-1 rounded-full border border-border px-4 py-2 text-center text-sm font-medium">Sign in</Link>
                 <Link to="/business" onClick={() => setMenu(false)} className="flex-1 rounded-full bg-primary px-4 py-2 text-center text-sm font-semibold text-primary-foreground">List Business</Link>
