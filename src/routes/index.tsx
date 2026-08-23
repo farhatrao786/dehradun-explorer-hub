@@ -131,15 +131,22 @@ function Home() {
         {/* Always-visible mobile nav row */}
         <div className="border-t border-border/60 md:hidden">
           <nav className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-3 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {["Explore", "Food", "Stay", "Blog", "Business"].map((l) => (
+            {([
+              { label: "Explore", to: "/explore" },
+              { label: "Food", to: "/food" },
+              { label: "Stay", to: "/stay" },
+              { label: "Blogs", to: "/blog" },
+              { label: "List Your Business", to: "/business" },
+            ] as const).map((l) => (
               <Link
-                key={l}
-                to={`/${l.toLowerCase()}`}
+                key={l.label}
+                to={l.to}
                 className="whitespace-nowrap rounded-full bg-secondary px-3 py-1.5 text-xs font-medium text-secondary-foreground"
               >
-                {l === "Business" ? "List Your Business" : l === "Blog" ? "Blogs" : l}
+                {l.label}
               </Link>
             ))}
+
             <Link to="/join" className="whitespace-nowrap rounded-full border border-border px-3 py-1.5 text-xs font-medium">
               Sign In
             </Link>
