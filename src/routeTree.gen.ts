@@ -17,14 +17,18 @@ import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BusinessRouteImport } from './routes/business'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AiRouteImport } from './routes/ai'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as SuccessRouteImport } from './routes/Success'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PlacesSlugRouteImport } from './routes/places.$slug'
 import { Route as HotelsSlugRouteImport } from './routes/hotels.$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ApiWebsearchRouteImport } from './routes/api/websearch'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 
 const StayRoute = StayRouteImport.update({
   id: '/stay',
@@ -66,6 +70,11 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AiRoute = AiRouteImport.update({
   id: '/ai',
   path: '/ai',
@@ -79,6 +88,10 @@ const AboutRoute = AboutRouteImport.update({
 const SuccessRoute = SuccessRouteImport.update({
   id: '/Success',
   path: '/Success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -96,6 +109,11 @@ const HotelsSlugRoute = HotelsSlugRouteImport.update({
   path: '/hotels/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 const ApiWebsearchRoute = ApiWebsearchRouteImport.update({
   id: '/api/websearch',
   path: '/api/websearch',
@@ -106,13 +124,19 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/Success': typeof SuccessRoute
   '/about': typeof AboutRoute
   '/ai': typeof AiRoute
-  '/blog': typeof BlogRoute
+  '/auth': typeof AuthRoute
+  '/blog': typeof BlogRouteWithChildren
   '/business': typeof BusinessRoute
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
@@ -122,15 +146,18 @@ export interface FileRoutesByFullPath {
   '/stay': typeof StayRoute
   '/api/chat': typeof ApiChatRoute
   '/api/websearch': typeof ApiWebsearchRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/hotels/$slug': typeof HotelsSlugRoute
   '/places/$slug': typeof PlacesSlugRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/Success': typeof SuccessRoute
   '/about': typeof AboutRoute
   '/ai': typeof AiRoute
-  '/blog': typeof BlogRoute
+  '/auth': typeof AuthRoute
+  '/blog': typeof BlogRouteWithChildren
   '/business': typeof BusinessRoute
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
@@ -140,16 +167,20 @@ export interface FileRoutesByTo {
   '/stay': typeof StayRoute
   '/api/chat': typeof ApiChatRoute
   '/api/websearch': typeof ApiWebsearchRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/hotels/$slug': typeof HotelsSlugRoute
   '/places/$slug': typeof PlacesSlugRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/Success': typeof SuccessRoute
   '/about': typeof AboutRoute
   '/ai': typeof AiRoute
-  '/blog': typeof BlogRoute
+  '/auth': typeof AuthRoute
+  '/blog': typeof BlogRouteWithChildren
   '/business': typeof BusinessRoute
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
@@ -159,8 +190,10 @@ export interface FileRoutesById {
   '/stay': typeof StayRoute
   '/api/chat': typeof ApiChatRoute
   '/api/websearch': typeof ApiWebsearchRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/hotels/$slug': typeof HotelsSlugRoute
   '/places/$slug': typeof PlacesSlugRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -169,6 +202,7 @@ export interface FileRouteTypes {
     | '/Success'
     | '/about'
     | '/ai'
+    | '/auth'
     | '/blog'
     | '/business'
     | '/contact'
@@ -179,14 +213,17 @@ export interface FileRouteTypes {
     | '/stay'
     | '/api/chat'
     | '/api/websearch'
+    | '/blog/$slug'
     | '/hotels/$slug'
     | '/places/$slug'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/Success'
     | '/about'
     | '/ai'
+    | '/auth'
     | '/blog'
     | '/business'
     | '/contact'
@@ -197,14 +234,18 @@ export interface FileRouteTypes {
     | '/stay'
     | '/api/chat'
     | '/api/websearch'
+    | '/blog/$slug'
     | '/hotels/$slug'
     | '/places/$slug'
+    | '/admin'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/Success'
     | '/about'
     | '/ai'
+    | '/auth'
     | '/blog'
     | '/business'
     | '/contact'
@@ -215,16 +256,20 @@ export interface FileRouteTypes {
     | '/stay'
     | '/api/chat'
     | '/api/websearch'
+    | '/blog/$slug'
     | '/hotels/$slug'
     | '/places/$slug'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   SuccessRoute: typeof SuccessRoute
   AboutRoute: typeof AboutRoute
   AiRoute: typeof AiRoute
-  BlogRoute: typeof BlogRoute
+  AuthRoute: typeof AuthRoute
+  BlogRoute: typeof BlogRouteWithChildren
   BusinessRoute: typeof BusinessRoute
   ContactRoute: typeof ContactRoute
   ExploreRoute: typeof ExploreRoute
@@ -296,6 +341,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ai': {
       id: '/ai'
       path: '/ai'
@@ -315,6 +367,13 @@ declare module '@tanstack/react-router' {
       path: '/Success'
       fullPath: '/Success'
       preLoaderRoute: typeof SuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -338,6 +397,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HotelsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
     '/api/websearch': {
       id: '/api/websearch'
       path: '/api/websearch'
@@ -352,15 +418,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   SuccessRoute: SuccessRoute,
   AboutRoute: AboutRoute,
   AiRoute: AiRoute,
-  BlogRoute: BlogRoute,
+  AuthRoute: AuthRoute,
+  BlogRoute: BlogRouteWithChildren,
   BusinessRoute: BusinessRoute,
   ContactRoute: ContactRoute,
   ExploreRoute: ExploreRoute,
