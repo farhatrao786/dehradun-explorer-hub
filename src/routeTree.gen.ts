@@ -23,6 +23,7 @@ import { Route as SuccessRouteImport } from './routes/Success'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PlacesSlugRouteImport } from './routes/places.$slug'
 import { Route as HotelsSlugRouteImport } from './routes/hotels.$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ApiWebsearchRouteImport } from './routes/api/websearch'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
@@ -96,6 +97,11 @@ const HotelsSlugRoute = HotelsSlugRouteImport.update({
   path: '/hotels/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 const ApiWebsearchRoute = ApiWebsearchRouteImport.update({
   id: '/api/websearch',
   path: '/api/websearch',
@@ -112,7 +118,7 @@ export interface FileRoutesByFullPath {
   '/Success': typeof SuccessRoute
   '/about': typeof AboutRoute
   '/ai': typeof AiRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/business': typeof BusinessRoute
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/stay': typeof StayRoute
   '/api/chat': typeof ApiChatRoute
   '/api/websearch': typeof ApiWebsearchRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/hotels/$slug': typeof HotelsSlugRoute
   '/places/$slug': typeof PlacesSlugRoute
 }
@@ -130,7 +137,7 @@ export interface FileRoutesByTo {
   '/Success': typeof SuccessRoute
   '/about': typeof AboutRoute
   '/ai': typeof AiRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/business': typeof BusinessRoute
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/stay': typeof StayRoute
   '/api/chat': typeof ApiChatRoute
   '/api/websearch': typeof ApiWebsearchRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/hotels/$slug': typeof HotelsSlugRoute
   '/places/$slug': typeof PlacesSlugRoute
 }
@@ -149,7 +157,7 @@ export interface FileRoutesById {
   '/Success': typeof SuccessRoute
   '/about': typeof AboutRoute
   '/ai': typeof AiRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/business': typeof BusinessRoute
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/stay': typeof StayRoute
   '/api/chat': typeof ApiChatRoute
   '/api/websearch': typeof ApiWebsearchRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/hotels/$slug': typeof HotelsSlugRoute
   '/places/$slug': typeof PlacesSlugRoute
 }
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/stay'
     | '/api/chat'
     | '/api/websearch'
+    | '/blog/$slug'
     | '/hotels/$slug'
     | '/places/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/stay'
     | '/api/chat'
     | '/api/websearch'
+    | '/blog/$slug'
     | '/hotels/$slug'
     | '/places/$slug'
   id:
@@ -215,6 +226,7 @@ export interface FileRouteTypes {
     | '/stay'
     | '/api/chat'
     | '/api/websearch'
+    | '/blog/$slug'
     | '/hotels/$slug'
     | '/places/$slug'
   fileRoutesById: FileRoutesById
@@ -224,7 +236,7 @@ export interface RootRouteChildren {
   SuccessRoute: typeof SuccessRoute
   AboutRoute: typeof AboutRoute
   AiRoute: typeof AiRoute
-  BlogRoute: typeof BlogRoute
+  BlogRoute: typeof BlogRouteWithChildren
   BusinessRoute: typeof BusinessRoute
   ContactRoute: typeof ContactRoute
   ExploreRoute: typeof ExploreRoute
@@ -338,6 +350,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HotelsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
     '/api/websearch': {
       id: '/api/websearch'
       path: '/api/websearch'
@@ -355,12 +374,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SuccessRoute: SuccessRoute,
   AboutRoute: AboutRoute,
   AiRoute: AiRoute,
-  BlogRoute: BlogRoute,
+  BlogRoute: BlogRouteWithChildren,
   BusinessRoute: BusinessRoute,
   ContactRoute: ContactRoute,
   ExploreRoute: ExploreRoute,
