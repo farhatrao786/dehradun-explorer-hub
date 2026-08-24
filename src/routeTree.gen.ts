@@ -17,6 +17,7 @@ import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BusinessRouteImport } from './routes/business'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AiRouteImport } from './routes/ai'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as SuccessRouteImport } from './routes/Success'
@@ -65,6 +66,11 @@ const BusinessRoute = BusinessRouteImport.update({
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AiRoute = AiRouteImport.update({
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/Success': typeof SuccessRoute
   '/about': typeof AboutRoute
   '/ai': typeof AiRoute
+  '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/business': typeof BusinessRoute
   '/contact': typeof ContactRoute
@@ -137,6 +144,7 @@ export interface FileRoutesByTo {
   '/Success': typeof SuccessRoute
   '/about': typeof AboutRoute
   '/ai': typeof AiRoute
+  '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/business': typeof BusinessRoute
   '/contact': typeof ContactRoute
@@ -157,6 +165,7 @@ export interface FileRoutesById {
   '/Success': typeof SuccessRoute
   '/about': typeof AboutRoute
   '/ai': typeof AiRoute
+  '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/business': typeof BusinessRoute
   '/contact': typeof ContactRoute
@@ -178,6 +187,7 @@ export interface FileRouteTypes {
     | '/Success'
     | '/about'
     | '/ai'
+    | '/auth'
     | '/blog'
     | '/business'
     | '/contact'
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/Success'
     | '/about'
     | '/ai'
+    | '/auth'
     | '/blog'
     | '/business'
     | '/contact'
@@ -216,6 +227,7 @@ export interface FileRouteTypes {
     | '/Success'
     | '/about'
     | '/ai'
+    | '/auth'
     | '/blog'
     | '/business'
     | '/contact'
@@ -236,6 +248,7 @@ export interface RootRouteChildren {
   SuccessRoute: typeof SuccessRoute
   AboutRoute: typeof AboutRoute
   AiRoute: typeof AiRoute
+  AuthRoute: typeof AuthRoute
   BlogRoute: typeof BlogRouteWithChildren
   BusinessRoute: typeof BusinessRoute
   ContactRoute: typeof ContactRoute
@@ -306,6 +319,13 @@ declare module '@tanstack/react-router' {
       path: '/blog'
       fullPath: '/blog'
       preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ai': {
@@ -389,6 +409,7 @@ const rootRouteChildren: RootRouteChildren = {
   SuccessRoute: SuccessRoute,
   AboutRoute: AboutRoute,
   AiRoute: AiRoute,
+  AuthRoute: AuthRoute,
   BlogRoute: BlogRouteWithChildren,
   BusinessRoute: BusinessRoute,
   ContactRoute: ContactRoute,
