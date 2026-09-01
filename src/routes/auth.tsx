@@ -36,14 +36,18 @@ function AuthPage() {
         if (error) throw error;
         navigate({ to: "/admin" });
       } else {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: { emailRedirectTo: `${window.location.origin}/auth` },
         });
         if (error) throw error;
-        setMessage("Account created. If email confirmation is on, confirm via the link we sent, then sign in.");
-        setMode("signin");
+        if (data.session) {
+          navigate({ to: "/admin" });
+        } else {
+          setMessage("Account created. Ab sign in kijiye.");
+          setMode("signin");
+        }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
