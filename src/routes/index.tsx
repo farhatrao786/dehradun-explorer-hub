@@ -87,6 +87,7 @@ const deals = [
 
 
 function Home() {
+  const latestPosts = Route.useLoaderData().slice(0, 3);
   const [menu, setMenu] = useState(false);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
