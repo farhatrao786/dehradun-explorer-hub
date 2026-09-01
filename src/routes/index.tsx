@@ -538,6 +538,7 @@ function Home() {
             <p>© {new Date().getFullYear()} TheDehradun.com · Made with ♥ in the Doon valley</p>
             <div className="flex items-center gap-4">
               <a href="mailto:hello@thedehradun.com" className="inline-flex items-center gap-1.5 hover:text-foreground"><Mail className="h-3.5 w-3.5" /> hello@thedehradun.com</a>
+              <Link to="/admin" className="hover:text-foreground">Editor login</Link>
             </div>
           </div>
         </div>
