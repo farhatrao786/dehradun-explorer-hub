@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import heroImg from "@/assets/hero-dehradun.jpg";
 import { places, placeImages } from "@/data/places";
+import { getPublishedPosts } from "@/lib/posts.functions";
 
 
 
@@ -38,6 +39,13 @@ export const Route = createFileRoute("/")({
       }),
     }],
   }),
+  loader: () => getPublishedPosts(),
+  errorComponent: () => (
+    <div className="px-4 py-20 text-center text-sm text-muted-foreground">Something went wrong loading this page.</div>
+  ),
+  notFoundComponent: () => (
+    <div className="px-4 py-20 text-center text-sm text-muted-foreground">Page not found.</div>
+  ),
   component: Home,
 });
 
@@ -76,11 +84,7 @@ const deals = [
   { brand: "Pacific Mall", offer: "Flat ₹500 off on ₹2000+", code: "PACIFIC500", color: "gradient-sun" },
 ];
 
-const blogPosts = [
-  { cat: "Places", title: "10 hidden waterfalls near Dehradun worth the drive", read: "6 min" },
-  { cat: "Food", title: "The definitive Doon cafe crawl — from Rajpur to Clement Town", read: "8 min" },
-  { cat: "Guides", title: "Moving to Dehradun? A local's checklist for your first month", read: "5 min" },
-];
+
 
 function Home() {
   const [menu, setMenu] = useState(false);
@@ -456,22 +460,22 @@ function Home() {
       {/* BLOG */}
       <Section id="blog" eyebrow="From the blog" title="Stories, guides & local knowledge" cta={{ label: "Read all posts", href: "/blog" }}>
         <div className="grid gap-6 md:grid-cols-3">
-          {blogPosts.map((p, i) => (
-            <a key={p.title} href="/blog" className="group block rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
+          {latestPosts.map((p, i) => (
+            <Link key={p.id} to="/blog/$slug" params={{ slug: p.slug }} className="group block rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
               <div className="relative aspect-[16/10] gradient-forest">
                 <img src={placeImages[i]} alt="" loading="lazy" width={1024} height={640} className="h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="p-5">
                 <div className="flex items-center gap-2 text-xs">
-                  <span className="rounded-full bg-primary/10 px-2 py-0.5 font-semibold text-primary">{p.cat}</span>
-                  <span className="text-muted-foreground">{p.read} read</span>
+                  <span className="rounded-full bg-primary/10 px-2 py-0.5 font-semibold text-primary">{p.category ?? "Dehradun"}</span>
+                  <span className="text-muted-foreground">{p.read_time ?? "3 min read"}</span>
                 </div>
                 <h3 className="mt-3 font-display text-lg font-semibold leading-snug">{p.title}</h3>
                 <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary">
                   Read article <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </Section>

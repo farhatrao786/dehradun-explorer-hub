@@ -29,6 +29,8 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ApiWebsearchRouteImport } from './routes/api/websearch'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
+import { Route as AuthenticatedAdminNewRouteImport } from './routes/_authenticated/admin/new'
+import { Route as AuthenticatedAdminIdEditRouteImport } from './routes/_authenticated/admin/$id.edit'
 
 const StayRoute = StayRouteImport.update({
   id: '/stay',
@@ -129,6 +131,17 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminNewRoute = AuthenticatedAdminNewRouteImport.update({
+  id: '/admin/new',
+  path: '/admin/new',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminIdEditRoute =
+  AuthenticatedAdminIdEditRouteImport.update({
+    id: '/admin/$id/edit',
+    path: '/admin/$id/edit',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -149,7 +162,9 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/hotels/$slug': typeof HotelsSlugRoute
   '/places/$slug': typeof PlacesSlugRoute
+  '/admin/new': typeof AuthenticatedAdminNewRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/$id/edit': typeof AuthenticatedAdminIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -170,7 +185,9 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/hotels/$slug': typeof HotelsSlugRoute
   '/places/$slug': typeof PlacesSlugRoute
+  '/admin/new': typeof AuthenticatedAdminNewRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/$id/edit': typeof AuthenticatedAdminIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -193,7 +210,9 @@ export interface FileRoutesById {
   '/blog/$slug': typeof BlogSlugRoute
   '/hotels/$slug': typeof HotelsSlugRoute
   '/places/$slug': typeof PlacesSlugRoute
+  '/_authenticated/admin/new': typeof AuthenticatedAdminNewRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/$id/edit': typeof AuthenticatedAdminIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -216,7 +235,9 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/hotels/$slug'
     | '/places/$slug'
+    | '/admin/new'
     | '/admin/'
+    | '/admin/$id/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -237,7 +258,9 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/hotels/$slug'
     | '/places/$slug'
+    | '/admin/new'
     | '/admin'
+    | '/admin/$id/edit'
   id:
     | '__root__'
     | '/'
@@ -259,7 +282,9 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/hotels/$slug'
     | '/places/$slug'
+    | '/_authenticated/admin/new'
     | '/_authenticated/admin/'
+    | '/_authenticated/admin/$id/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -425,15 +450,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/new': {
+      id: '/_authenticated/admin/new'
+      path: '/admin/new'
+      fullPath: '/admin/new'
+      preLoaderRoute: typeof AuthenticatedAdminNewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/$id/edit': {
+      id: '/_authenticated/admin/$id/edit'
+      path: '/admin/$id/edit'
+      fullPath: '/admin/$id/edit'
+      preLoaderRoute: typeof AuthenticatedAdminIdEditRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminNewRoute: typeof AuthenticatedAdminNewRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminIdEditRoute: typeof AuthenticatedAdminIdEditRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminNewRoute: AuthenticatedAdminNewRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminIdEditRoute: AuthenticatedAdminIdEditRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
